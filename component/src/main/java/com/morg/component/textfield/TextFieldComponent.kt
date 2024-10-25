@@ -352,7 +352,17 @@ private fun TextField(
                 ),
                 shape = RoundedCornerShape(8.dp)
             )
-            .padding(16.dp)
+            .padding(
+                start = 16.dp, top = when (componentSize) {
+                    ComponentSize.SMALL -> 8.dp
+                    ComponentSize.MEDIUM -> 10.dp
+                    ComponentSize.LARGE -> 12.dp
+                }, end = 16.dp, bottom = when (componentSize) {
+                    ComponentSize.SMALL -> 8.dp
+                    ComponentSize.MEDIUM -> 10.dp
+                    ComponentSize.LARGE -> 12.dp
+                }
+            )
             .fillMaxWidth(), verticalAlignment = Alignment.CenterVertically
     ) {
         PrefixLayout(prefixText, componentSize, prefixIconImages, onClickIcon)
