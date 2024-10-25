@@ -2,7 +2,9 @@ package com.morg.component.button
 
 import androidx.compose.foundation.BorderStroke
 import androidx.compose.foundation.layout.RowScope
+import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.height
+import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
@@ -28,6 +30,19 @@ fun ButtonComponentPreview() {
     ButtonComponent()
 }
 
+/**
+ * A composable function that creates a customizable button component.
+ *
+ * @param modifier The modifier to be applied to the button.
+ * @param label The text label to be displayed on the button.
+ * @param componentType The type of the button, which determines its style (PRIMARY, SECONDARY, TERTIARY).
+ * @param componentSize The size of the button (SMALL, MEDIUM, LARGE).
+ * @param componentColor The color of the button's content.
+ * @param icon An optional icon to be displayed on the button.
+ * @param underline Whether the text label should be underlined.
+ * @param enabled Whether the button is enabled or disabled.
+ * @param onClick The callback to be invoked when the button is clicked.
+ */
 @Composable
 fun ButtonComponent(
     modifier: Modifier = Modifier,
@@ -47,74 +62,49 @@ fun ButtonComponent(
     }
 
     val textDecoration = if (underline) TextDecoration.Underline else TextDecoration.None
-    val borderStroke = if (componentType == ComponentType.SECONDARY) BorderStroke(
-        1.dp,
-        componentColor
-    ) else BorderStroke(0.dp, Color.Transparent)
+    val buttonColor = if (componentType == ComponentType.PRIMARY) Color.White else componentColor
 
-    val buttonColors = when (componentType) {
-        ComponentType.TERTIARY -> ButtonDefaults.outlinedButtonColors(contentColor = Color.Transparent)
-        ComponentType.SECONDARY -> ButtonDefaults.outlinedButtonColors(contentColor = componentColor)
-        else -> ButtonDefaults.buttonColors(contentColor = componentColor)
-    }
-
-    val button: @Composable RowScope.() -> Unit = {
-        IconCustom(icon)
-        TextCustom(
-            label,
-            if (componentType == ComponentType.PRIMARY) Color.White else componentColor,
-            componentSize,
-            textDecoration
+    val buttonContent: @Composable RowScope.() -> Unit = {
+        icon?.let {
+            Icon(
+                imageVector = it,
+                contentDescription = null,
+                tint = Color.White
+            )
+            Spacer(modifier = Modifier.width(8.dp))
+        }
+        Text(
+            text = label,
+            color = buttonColor,
+            style = setComponentSize(componentSize).copy(textDecoration = textDecoration)
         )
     }
 
-    when (componentType) {
-        ComponentType.TERTIARY, ComponentType.SECONDARY -> {
-            OutlinedButton(
-                onClick = onClick,
-                border = borderStroke,
-                shape = RoundedCornerShape(8.dp),
-                enabled = enabled,
-                modifier = modifier.height(height),
-                colors = buttonColors,
-                content = button
-            )
-        }
-
-        else -> {
-            Button(
-                onClick = onClick,
-                shape = RoundedCornerShape(8.dp),
-                enabled = enabled,
-                modifier = modifier.height(height),
-                colors = buttonColors,
-                content = button
-            )
-        }
+    val borderStroke = if (componentType == ComponentType.SECONDARY) BorderStroke(1.dp, componentColor) else BorderStroke(0.dp, Color.Transparent)
+    val buttonColors = if (componentType == ComponentType.TERTIARY) {
+        ButtonDefaults.outlinedButtonColors(contentColor = Color.Transparent)
+    } else {
+        ButtonDefaults.outlinedButtonColors(contentColor = componentColor)
     }
-}
 
-@Composable
-fun TextCustom(
-    label: String,
-    componentColor: Color,
-    componentSize: ComponentSize,
-    textDecoration: TextDecoration
-) {
-    Text(
-        text = label,
-        color = componentColor,
-        style = setComponentSize(componentSize).copy(textDecoration = textDecoration)
-    )
-}
-
-@Composable
-fun IconCustom(icon: ImageVector?) {
-    icon?.let {
-        Icon(
-            imageVector = it,
-            contentDescription = null,
-            tint = Color.White
+    if (componentType == ComponentType.TERTIARY || componentType == ComponentType.SECONDARY) {
+        OutlinedButton(
+            onClick = onClick,
+            border = borderStroke,
+            shape = RoundedCornerShape(8.dp),
+            enabled = enabled,
+            modifier = modifier.height(height),
+            colors = buttonColors,
+            content = buttonContent
+        )
+    } else {
+        Button(
+            onClick = onClick,
+            shape = RoundedCornerShape(8.dp),
+            enabled = enabled,
+            modifier = modifier.height(height),
+            colors = ButtonDefaults.buttonColors(),
+            content = buttonContent
         )
     }
 }
