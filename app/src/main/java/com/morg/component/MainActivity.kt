@@ -24,9 +24,9 @@ import androidx.compose.ui.unit.dp
 import com.morg.component.button.ButtonComponent
 import com.morg.component.textfield.TextFieldComponent
 import com.morg.component.textfield.TextInputType
-import com.morg.component.ui.theme.ComponentSize
-import com.morg.component.ui.theme.ComponentTheme
-import com.morg.component.ui.theme.ComponentType
+import com.morg.component.util.theme.ComponentSize
+import com.morg.component.util.theme.ComponentTheme
+import com.morg.component.util.theme.ComponentType
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

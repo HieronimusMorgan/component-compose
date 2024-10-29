@@ -61,4 +61,5 @@ dependencies {
     implementation(libs.ui.tooling)
     implementation(libs.ui.tooling.preview)
     implementation(libs.androidx.material.icons.extended)
+    implementation(libs.coil.compose)
 }

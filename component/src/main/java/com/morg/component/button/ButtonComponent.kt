@@ -21,8 +21,8 @@ import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.morg.component.ui.theme.ComponentSize
-import com.morg.component.ui.theme.ComponentType
+import com.morg.component.util.theme.ComponentSize
+import com.morg.component.util.theme.ComponentType
 
 @Preview(showBackground = true)
 @Composable
@@ -76,11 +76,14 @@ fun ButtonComponent(
         Text(
             text = label,
             color = buttonColor,
-            style = setComponentSize(componentSize).copy(textDecoration = textDecoration)
+            style = setTextComponentSize(componentSize).copy(textDecoration = textDecoration)
         )
     }
 
-    val borderStroke = if (componentType == ComponentType.SECONDARY) BorderStroke(1.dp, componentColor) else BorderStroke(0.dp, Color.Transparent)
+    val borderStroke = if (componentType == ComponentType.SECONDARY) BorderStroke(
+        1.dp,
+        componentColor
+    ) else BorderStroke(0.dp, Color.Transparent)
     val buttonColors = if (componentType == ComponentType.TERTIARY) {
         ButtonDefaults.outlinedButtonColors(contentColor = Color.Transparent)
     } else {
@@ -110,7 +113,7 @@ fun ButtonComponent(
 }
 
 @Composable
-fun setComponentSize(size: ComponentSize): TextStyle {
+internal fun setTextComponentSize(size: ComponentSize): TextStyle {
     return when (size) {
         ComponentSize.SMALL -> TextStyle(fontSize = 12.sp)
         ComponentSize.MEDIUM -> TextStyle(fontSize = 14.sp)

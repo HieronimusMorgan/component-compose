@@ -49,15 +49,18 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.morg.component.ui.theme.BodyMediumMedium
-import com.morg.component.ui.theme.ComponentSize
+import com.morg.component.util.theme.BodyLarge
+import com.morg.component.util.theme.BodyMedium
+import com.morg.component.util.theme.ComponentSize
 
 @Preview(showBackground = true)
 @Composable
 fun Preview() {
     Column {
         TextFieldComponent(label = "Password",
+            textStyleLabel = BodyLarge,
             value = "",
+            componentSize = ComponentSize.LARGE,
             hint = "Enter your password",
             onTextChanged = { /* handle text change */ })
         TextFieldComponent(label = "Password",
@@ -96,7 +99,7 @@ fun Preview() {
  * fun TextFieldComponent(
  *     modifier: Modifier = Modifier,
  *     labelModifier: Modifier = Modifier,
- *     textStyleLabel: TextStyle = BodyMediumMedium,
+ *     textStyleLabel: TextStyle = BodyMedium,
  *     label: String = "",
  *     value: String = "",
  *     hint: String = "Enter text here",
@@ -193,12 +196,12 @@ fun Preview() {
 fun TextFieldComponent(
     modifier: Modifier = Modifier,
     labelModifier: Modifier = Modifier,
-    textStyleLabel: TextStyle = BodyMediumMedium,
+    textStyleLabel: TextStyle = BodyMedium,
     label: String = "",
     value: String = "",
     readOnly: Boolean = false,
     enable: Boolean = true,
-    hint: String = "Enter text here",
+    hint: String = "",
     onImeAction: ImeAction = ImeAction.Done,
     componentSize: ComponentSize = ComponentSize.LARGE,
     singleLine: Boolean = true,
@@ -707,5 +710,5 @@ fun iconSizeForComponentSize(componentSize: ComponentSize): Dp {
 }
 
 enum class TextInputType {
-    NORMAL, PASSWORD, PHONE, SEARCH, DROPDOWN
+    NORMAL, PASSWORD, PHONE, DROPDOWN
 }

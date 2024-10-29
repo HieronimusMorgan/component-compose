@@ -1,4 +1,4 @@
-package com.morg.component.ui.theme
+package com.morg.component.util.theme
 
 import android.os.Build
 import androidx.compose.foundation.isSystemInDarkTheme

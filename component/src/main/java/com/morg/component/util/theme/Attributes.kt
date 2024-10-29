@@ -1,4 +1,4 @@
-package com.morg.component.ui.theme
+package com.morg.component.util.theme
 
 enum class ComponentSize {
     SMALL, MEDIUM, LARGE;
