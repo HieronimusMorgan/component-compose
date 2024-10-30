@@ -95,7 +95,7 @@ fun Preview() {
 /**
  * The TextFieldComponent function is a composable function in Kotlin that creates a customizable text field component using Jetpack Compose. This function allows developers to specify various parameters to tailor the text field's appearance and behavior.  The function signature includes several parameters with default values, such as modifier, labelModifier, textStyleLabel, label, value, hint, onImeAction, componentSize, singleLine, textInputType, onTextChanged, and more. These parameters provide flexibility in customizing the text field. For example, componentSize determines the text field's size (SMALL, MEDIUM, LARGE), and textInputType specifies the type of input (NORMAL, PASSWORD, PHONE, SEARCH, DROPDOWN).
  *
- * ```
+ * ``` kotlin
  * fun TextFieldComponent(
  *     modifier: Modifier = Modifier,
  *     labelModifier: Modifier = Modifier,
@@ -111,14 +111,14 @@ fun Preview() {
  * )
  * ```
  * The function uses a Column composable to arrange the label and text field vertically. If a label is provided, it is displayed above the text field using the LabelSection composable, which applies the specified textStyleLabel and labelModifier.
- * ```
+ * ```kotlin
  * Column {
  *     LabelSection(label, labelModifier, textStyleLabel, componentSize)
  *     // TextField logic here
  * }
  * ```
  * Depending on the textInputType, the function creates different types of text fields. For example, if the textInputType is PASSWORD, it creates a password text field with a visibility toggle icon. If the textInputType is PHONE, it creates a text field with a country code prefix. For other types, it creates a standard text field.
- * ```
+ * ```kotlin
  * when (textInputType) {
  *     TextInputType.PASSWORD -> {
  *         // Password text field logic
@@ -135,7 +135,7 @@ fun Preview() {
  * }
  * ```
  * The TextField composable is used to create the actual text field. It includes logic for handling text changes, focus changes, and IME actions. The BasicTextField composable is used to render the text input, and it is styled based on the provided parameters.
- * ```
+ * ```kotlin
  * BasicTextField(
  *     value = text,
  *     onValueChange = onTextChanged,

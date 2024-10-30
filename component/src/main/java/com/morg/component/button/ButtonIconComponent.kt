@@ -129,6 +129,7 @@ fun ButtonIconComponent(
     ) {
         IconButton(
             onClick = onClick,
+            enabled = enabled,
             modifier = modifier.size(size),
         ) {
             Icon(

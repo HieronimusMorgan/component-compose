@@ -16,6 +16,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
@@ -23,6 +24,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import com.morg.component.util.theme.ComponentSize
 import com.morg.component.util.theme.ComponentType
+import com.morg.component.util.theme.setId
 
 @Preview(showBackground = true)
 @Composable
@@ -31,8 +33,88 @@ fun ButtonComponentPreview() {
 }
 
 /**
- * A composable function that creates a customizable button component.
+ * The ButtonComponent function is a composable function in Kotlin that creates a customizable button using Jetpack Compose. It takes several parameters to define its appearance and behavior, such as modifier, label, componentType, componentSize, componentColor, icon, underline, enabled, and onClick.
  *
+ * The modifier parameter allows you to apply custom modifications to the button, while label specifies the text to be displayed on the button. The componentType parameter determines the style of the button, which can be PRIMARY, SECONDARY, or TERTIARY. The componentSize parameter defines the size of the button, which can be SMALL, MEDIUM, or LARGE. The componentColor parameter sets the color of the button's content, and icon allows you to add an optional icon to the button. The underline parameter specifies whether the text label should be underlined, and enabled determines if the button is clickable. The onClick parameter is a callback function that is invoked when the button is clicked.  The function calculates the height of the button based on the componentSize parameter:
+ * ```
+ * val height = when (componentSize) {
+ *     ComponentSize.SMALL -> 32.dp
+ *     ComponentSize.MEDIUM -> 40.dp
+ *     ComponentSize.LARGE -> 48.dp
+ * }
+ * ```
+ *
+ * It also sets the text decoration based on the underline parameter and determines the button color based on the componentType:
+ * ```
+ * val textDecoration = if (underline) TextDecoration.Underline else TextDecoration.None
+ * val buttonColor = if (componentType == ComponentType.PRIMARY) Color.White else componentColor
+ * ```
+ *
+ * The buttonContent variable is a composable lambda that defines the content of the button, including the optional icon and the text label:
+ * ```
+ * val buttonContent: @Composable RowScope.() -> Unit = {
+ *     icon?.let {
+ *         Icon(
+ *             imageVector = it,
+ *             contentDescription = null,
+ *             tint = Color.White
+ *         )
+ *         Spacer(modifier = Modifier.width(8.dp))
+ *     }
+ *     Text(
+ *         text = label,
+ *         color = buttonColor,
+ *         style = setTextComponentSize(componentSize).copy(textDecoration = textDecoration)
+ *     )
+ * }
+ * ```
+ * The function sets the border stroke and button colors based on the componentType:
+ * ```
+ * val borderStroke = if (componentType == ComponentType.SECONDARY) BorderStroke(
+ *     1.dp,
+ *     componentColor
+ * ) else BorderStroke(0.dp, Color.Transparent)
+ * val buttonColors = if (componentType == ComponentType.TERTIARY) {
+ *     ButtonDefaults.outlinedButtonColors(contentColor = Color.Transparent)
+ * } else {
+ *     ButtonDefaults.outlinedButtonColors(contentColor = componentColor)
+ * }
+ * ```
+ *
+ * Finally, the function uses conditional logic to determine whether to create an OutlinedButton or a regular Button based on the componentType:
+ * ```
+ * if (componentType == ComponentType.TERTIARY || componentType == ComponentType.SECONDARY) {
+ *     OutlinedButton(
+ *         onClick = onClick,
+ *         border = borderStroke,
+ *         shape = RoundedCornerShape(8.dp),
+ *         enabled = enabled,
+ *         modifier = modifier.height(height),
+ *         colors = buttonColors,
+ *         content = buttonContent
+ *     )
+ * } else {
+ *     Button(
+ *         onClick = onClick,
+ *         shape = RoundedCornerShape(8.dp),
+ *         enabled = enabled,
+ *         modifier = modifier.height(height),
+ *         colors = ButtonDefaults.buttonColors(),
+ *         content = buttonContent
+ *     )
+ * }
+ * ```
+ * The setTextComponentSize function is an internal helper function that returns a TextStyle based on the componentSize parameter:
+ * ```
+ * @Composable
+ * internal fun setTextComponentSize(size: ComponentSize): TextStyle {
+ *     return when (size) {
+ *         ComponentSize.SMALL -> TextStyle(fontSize = 12.sp)
+ *         ComponentSize.MEDIUM -> TextStyle(fontSize = 14.sp)
+ *         ComponentSize.LARGE -> TextStyle(fontSize = 16.sp)
+ *     }
+ * }
+ * ```
  * @param modifier The modifier to be applied to the button.
  * @param label The text label to be displayed on the button.
  * @param componentType The type of the button, which determines its style (PRIMARY, SECONDARY, TERTIARY).
@@ -46,6 +128,7 @@ fun ButtonComponentPreview() {
 @Composable
 fun ButtonComponent(
     modifier: Modifier = Modifier,
+    id: String? = null,
     label: String = "",
     componentType: ComponentType = ComponentType.PRIMARY,
     componentSize: ComponentSize = ComponentSize.MEDIUM,
@@ -55,6 +138,8 @@ fun ButtonComponent(
     enabled: Boolean = true,
     onClick: () -> Unit = {}
 ) {
+    modifier.layoutId("btn_${setId(id, label)}")
+
     val height = when (componentSize) {
         ComponentSize.SMALL -> 32.dp
         ComponentSize.MEDIUM -> 40.dp

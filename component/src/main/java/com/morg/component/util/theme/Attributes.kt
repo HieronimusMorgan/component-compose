@@ -1,5 +1,7 @@
 package com.morg.component.util.theme
 
+import java.util.Locale
+
 enum class ComponentSize {
     SMALL, MEDIUM, LARGE;
 
@@ -22,4 +24,11 @@ enum class ComponentType {
             TERTIARY -> "tertiary"
         }
     }
+}
+
+fun setId(id: String?, label: String): String {
+    return id
+        ?: label.trim()
+            .lowercase(Locale.getDefault())
+            .replace("\\s+".toRegex(), "_")
 }

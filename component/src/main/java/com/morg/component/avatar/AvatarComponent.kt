@@ -106,6 +106,86 @@ fun AvatarComponentPreview() {
     }
 }
 
+/**
+ * Composable function to display an avatar component.
+ * The AvatarComponent function takes several parameters, including modifier, name, size, textStyle, icon, type, names, avatarCounter, badge, group, isSelected, and notification. Depending on the group and type parameters, it delegates the rendering to other composable functions like GroupAvatar, MultipleAvatar, DefaultAvatar, and InitialAvatar.
+ * ```
+ * when (group) {
+ *     AvatarGroup.Group -> GroupAvatar(modifier, size, textStyle, type, names ?: emptyList())
+ *     AvatarGroup.Multiple -> MultipleAvatar(modifier, size, textStyle, type, avatarCounter, names ?: emptyList())
+ *     else -> {
+ *         when (type) {
+ *             AvatarType.Default -> DefaultAvatar(modifier, size, icon, badge, isSelected, notification)
+ *             AvatarType.Initial -> name?.let {
+ *                 InitialAvatar(it, modifier, size, textStyle, badge, isSelected, notification)
+ *             }
+ *         }
+ *     }
+ * }
+ * ```
+ * The MultipleAvatar function creates a row of avatars, each potentially displaying a different name or a default icon if the name is not provided. It uses a loop to create multiple Box composables, each containing either a DefaultAvatar or an InitialAvatar.
+ * ```
+ * for (index in 0 until avatarCounter) {
+ *     Box(modifier = Modifier.zIndex(index.toFloat()).offset(x = (-(size.value / 2.5) * index).dp)) {
+ *         if (type == AvatarType.Default || index >= names.size || names[index].isEmpty()) {
+ *             DefaultAvatar(modifier, size, Icons.Filled.Person)
+ *         } else {
+ *             InitialAvatar(names[index], modifier, size, textStyle)
+ *         }
+ *     }
+ * }
+ * ```
+ * The GroupAvatar function is similar but is limited to displaying up to three avatars in a row. It also decides between DefaultAvatar and InitialAvatar based on the provided names and type.  The DefaultAvatar function draws a circular avatar with a default icon and optionally adds a badge or a notification. It uses a Canvas to draw the circle and an Image composable to display the icon.
+ * ```
+ * Canvas(modifier = modifier.size(size)) {
+ *     drawCircle(SolidColor(Color(0XFFE4E6E7)))
+ * }
+ * Image(
+ *     imageVector = icon,
+ *     contentDescription = null,
+ *     modifier = Modifier.fillMaxSize(),
+ *     colorFilter = ColorFilter.tint(color = Color(0XFFAEB4B7))
+ * )
+ * ```
+ * The InitialAvatar function displays the initials of a given name inside a circular avatar. It calculates the initials using the getInitials function and determines the background color using the toHslColor extension function.
+ * ```
+ * val initials = getInitials(name)
+ * val color = remember(name) { Color(initials.toHslColor()) }
+ * Canvas(modifier = Modifier.fillMaxSize()) {
+ *     drawCircle(SolidColor(color))
+ * }
+ * Text(text = initials, style = textStyle, color = Color.White)
+ * ```
+ * The BadgeBox and NotificationBadge functions are used to display badges and notifications on the avatars. BadgeBox can display an icon or a legend badge, while NotificationBadge shows a notification count.
+ * ```
+ *Box(
+ *     modifier = modifier
+ *         .size(if (isLegend) size / 4 else size / 3)
+ *         .background(Color(0xFF4CAF50), shape = CircleShape)
+ * ) {
+ *     icon?.let {
+ *         Image(
+ *             modifier = Modifier.padding(SpacingComponent.Sm2),
+ *             imageVector = it,
+ *             colorFilter = ColorFilter.tint(Color.White),
+ *             contentDescription = null
+ *         )
+ *     }
+ * }
+ * ```
+ * @param modifier Modifier to be applied to the avatar component.
+ * @param name Optional name to be displayed as initials in the avatar.
+ * @param size Size of the avatar.
+ * @param textStyle Text style to be applied to the initials.
+ * @param icon Icon to be displayed in the avatar.
+ * @param type Type of the avatar (Default or Initial).
+ * @param names List of names for group or multiple avatars.
+ * @param avatarCounter Number of avatars to be displayed in multiple avatar mode.
+ * @param badge Optional badge to be displayed on the avatar.
+ * @param group Group type of the avatar (Group or Multiple).
+ * @param isSelected Boolean indicating if the avatar is selected.
+ * @param notification Optional notification text to be displayed on the avatar.
+ */
 @Composable
 fun AvatarComponent(
     modifier: Modifier = Modifier,

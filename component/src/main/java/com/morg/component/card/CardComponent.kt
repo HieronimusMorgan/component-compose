@@ -82,6 +82,81 @@ fun CardComponentPreview() {
     }
 }
 
+/**
+ * The CardComponent function takes several parameters, including modifier, title, styleTitle, description, styleDescription, map, styleMapTitle, styleMapValue, cardType, cardStyle, color, productModel, and onItemClicked. Depending on the cardType parameter, it delegates the rendering to other composable functions like CardList, CardDetail, and CardProductLandscape.
+ * ```
+ * when (cardType) {
+ *     CardType.List -> {
+ *         CardList(
+ *             modifier = modifier,
+ *             title = title,
+ *             styleTitle = styleTitle,
+ *             description = description,
+ *             styleDescription = styleDescription,
+ *             cardStyle = cardStyle,
+ *             color = color,
+ *             onItemClicked = onItemClicked
+ *         )
+ *     }
+ *     // Other cases...
+ * }
+ * ```
+ *
+ * The CardProductLandscape function creates a card displaying product information in a landscape layout. It uses the rememberAsyncImagePainter to load and display the product image and conditionally shows a badge and a more options icon.
+ * ```
+ * val painter = rememberAsyncImagePainter(
+ *     model = ImageRequest.Builder(context)
+ *         .data(productModel.productImage)
+ *         .transformations(CircleCropTransformation())
+ *         .placeholder(R.drawable.ic_no_image_grey_component)
+ *         .error(R.drawable.ic_no_image_grey_component)
+ *         .build()
+ * )
+ * ```
+ *
+ * The CardList function creates a card with a title and an optional description. It uses a Row composable to arrange the title, description, and an icon horizontally.
+ * ```
+ * Row(
+ *     modifier = Modifier
+ *         .padding(SpacingComponent.Md16)
+ *         .fillMaxWidth()
+ *         .wrapContentHeight(),
+ *     horizontalArrangement = Arrangement.Start,
+ *     verticalAlignment = Alignment.CenterVertically
+ * ) {
+ *     // Content...
+ * }
+ * ```
+ *
+ * The CardDetail function displays a card with a title and a map of key-value pairs. It iterates over the map to display each key-value pair in a Row composable.
+ * ```
+ * map?.forEach { (key, value) ->
+ *     Row(
+ *         modifier = Modifier
+ *             .fillMaxWidth()
+ *             .wrapContentHeight(),
+ *         verticalAlignment = Alignment.CenterVertically,
+ *         horizontalArrangement = Arrangement.Center
+ *     ) {
+ *         // Key and value text...
+ *     }
+ * }
+ * ```
+ *
+ * @param modifier Modifier to be applied to the card component.
+ * @param title Title text to be displayed on the card.
+ * @param styleTitle Text style to be applied to the title.
+ * @param description Optional description text to be displayed on the card.
+ * @param styleDescription Text style to be applied to the description.
+ * @param map Optional map of key-value pairs to be displayed on the card.
+ * @param styleMapTitle Text style to be applied to the map keys.
+ * @param styleMapValue Text style to be applied to the map values.
+ * @param cardType Type of the card (List, Detail, ProductLandscape, ProductPortrait, FeedCard).
+ * @param cardStyle Style of the card (Color, Outline, Shadow).
+ * @param color Background color of the card.
+ * @param productModel Optional product model to be displayed on the card.
+ * @param onItemClicked Callback function to be invoked when the card is clicked.
+ */
 @Composable
 fun CardComponent(
     modifier: Modifier = Modifier,
