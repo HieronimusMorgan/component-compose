@@ -37,6 +37,7 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.onFocusChanged
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.platform.LocalFocusManager
 import androidx.compose.ui.platform.LocalSoftwareKeyboardController
 import androidx.compose.ui.text.TextStyle
@@ -52,6 +53,7 @@ import androidx.compose.ui.unit.sp
 import com.morg.component.util.theme.BodyLarge
 import com.morg.component.util.theme.BodyMedium
 import com.morg.component.util.theme.ComponentSize
+import com.morg.component.util.theme.setId
 
 @Preview(showBackground = true)
 @Composable
@@ -170,6 +172,7 @@ fun Preview() {
  * The TextFieldComponent function is highly customizable and can be used to create various types of text fields with different behaviors and appearances, making it a versatile component in a Jetpack Compose application.
  *
  * @param modifier The modifier to be applied to the text field.
+ * @param id The optional ID for the text field.
  * @param labelModifier The modifier to be applied to the label.
  * @param textStyleLabel The text style to be applied to the label.
  * @param label The text label to be displayed above the text field.
@@ -195,6 +198,7 @@ fun Preview() {
 @Composable
 fun TextFieldComponent(
     modifier: Modifier = Modifier,
+    id: String? = null,
     labelModifier: Modifier = Modifier,
     textStyleLabel: TextStyle = BodyMedium,
     label: String = "",
@@ -217,6 +221,8 @@ fun TextFieldComponent(
     dropdownOptions: List<String> = emptyList(),
     onDropdownOptionSelected: (String) -> Unit = {}
 ) {
+    modifier.layoutId("txt_${setId(id, label)}")
+
     var text by remember { mutableStateOf(value) }
     var isFocused by remember { mutableStateOf(false) }
     var passwordVisibility by remember { mutableStateOf(false) }

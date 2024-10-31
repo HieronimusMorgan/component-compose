@@ -30,6 +30,7 @@ import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
@@ -46,6 +47,7 @@ import com.morg.component.util.theme.BodyMedium
 import com.morg.component.util.theme.ComponentSize
 import com.morg.component.util.theme.SpacingComponent
 import com.morg.component.util.theme.TitleSmall
+import com.morg.component.util.theme.setId
 
 @Preview(showBackground = true)
 @Composable
@@ -160,6 +162,7 @@ fun CardComponentPreview() {
 @Composable
 fun CardComponent(
     modifier: Modifier = Modifier,
+    id: String? = null,
     title: String = "",
     styleTitle: TextStyle = TitleSmall,
     description: String? = null,
@@ -173,6 +176,7 @@ fun CardComponent(
     productModel: CardProductModel? = null,
     onItemClicked: () -> Unit = {}
 ) {
+    modifier.layoutId("card_${setId(id, "")}")
     when (cardType) {
         CardType.List -> {
             CardList(

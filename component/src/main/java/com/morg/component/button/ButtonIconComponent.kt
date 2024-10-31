@@ -19,10 +19,12 @@ import androidx.compose.ui.Modifier
 import androidx.compose.ui.draw.clip
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.morg.component.util.theme.ComponentSize
 import com.morg.component.util.theme.ComponentType
+import com.morg.component.util.theme.setId
 
 @Preview(showBackground = true)
 @Composable
@@ -96,6 +98,7 @@ fun ButtonIconComponentPreview() {
 @Composable
 fun ButtonIconComponent(
     modifier: Modifier = Modifier,
+    id: String? = null,
     componentType: ComponentType = ComponentType.PRIMARY,
     componentSize: ComponentSize = ComponentSize.MEDIUM,
     componentColor: Color = MaterialTheme.colorScheme.primary,
@@ -104,7 +107,7 @@ fun ButtonIconComponent(
     enabled: Boolean = true,
     onClick: () -> Unit = {}
 ) {
-
+    modifier.layoutId("btn_icon_${setId(id, "")}")
     val size = when (componentSize) {
         ComponentSize.SMALL -> 32.dp
         ComponentSize.MEDIUM -> 40.dp

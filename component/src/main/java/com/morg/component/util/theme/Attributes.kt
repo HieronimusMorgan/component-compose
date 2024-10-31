@@ -26,7 +26,7 @@ enum class ComponentType {
     }
 }
 
-fun setId(id: String?, label: String): String {
+fun setId(id: String?, label: String = ""): String {
     return id
         ?: label.trim()
             .lowercase(Locale.getDefault())

@@ -5,6 +5,21 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 /**
+ * The SpacingComponent object in Kotlin provides predefined spacing values for UI components using Jetpack Compose. Each spacing value is represented as a Dp (density-independent pixel), ensuring consistent spacing across different screen densities.
+ * The object defines several spacing values, each with a descriptive name indicating its size. For example, None represents no spacing with a value of 0.dp:
+ * ``` kotlin
+ * val None: Dp
+ *     @Composable get() = 0.dp
+ * ```
+ *
+ * Similarly, other spacing values are defined, such as Sm2 for 2.dp, Sm4 for 4.dp, and so on, up to Lg48 for 48.dp. Each of these values is annotated with @Composable, indicating that they can be used within composable functions.
+ * These predefined spacing values help maintain consistency in the UI design by providing a standard set of sizes that can be easily reused across different components. For instance, Sm8 represents a small spacing value of 8.dp:
+ * ``` kotlin
+ * val Sm8: Dp
+ *    @Composable get() = 8.dp
+ * ```
+ * By using these predefined values, developers can ensure that their UI components have consistent spacing, which contributes to a cohesive and visually appealing design.
+ *
  * Object that provides predefined spacing values for UI components.
  * Each spacing value is represented as a Dp (density-independent pixel).
  */

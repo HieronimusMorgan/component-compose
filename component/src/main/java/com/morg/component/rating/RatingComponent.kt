@@ -15,8 +15,10 @@ import androidx.compose.runtime.remember
 import androidx.compose.runtime.setValue
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import com.morg.component.util.theme.setId
 import kotlin.math.roundToInt
 
 @Preview(showBackground = true)
@@ -76,10 +78,12 @@ fun RatingComponentPreview() {
 @Composable
 fun RatingComponent(
     modifier: Modifier = Modifier,
+    id: String? = null,
     rating: Float = 0f,
     maxRating: Int = 5,
     onRatingChanged: (Float) -> Unit = {}
 ) {
+    modifier.layoutId("rating_${setId(id, "")}")
     var selectedRating by remember { mutableIntStateOf(rating.roundToInt()) }
 
     Row(modifier = modifier) {

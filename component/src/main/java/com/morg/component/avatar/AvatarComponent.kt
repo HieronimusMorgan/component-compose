@@ -30,6 +30,7 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.graphics.SolidColor
 import androidx.compose.ui.graphics.vector.ImageVector
+import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -40,6 +41,7 @@ import androidx.compose.ui.zIndex
 import androidx.core.graphics.ColorUtils
 import com.morg.component.util.theme.BodyMedium
 import com.morg.component.util.theme.SpacingComponent
+import com.morg.component.util.theme.setId
 import kotlin.math.absoluteValue
 
 @Preview(showBackground = true)
@@ -189,6 +191,7 @@ fun AvatarComponentPreview() {
 @Composable
 fun AvatarComponent(
     modifier: Modifier = Modifier,
+    id: String? = null,
     name: String? = null,
     size: Dp = AvatarSize.Medium,
     textStyle: TextStyle = BodyMedium,
@@ -201,6 +204,7 @@ fun AvatarComponent(
     isSelected: Boolean = false,
     notification: String? = null,
 ) {
+    modifier.layoutId("avatar_${setId(id, name ?: "")}")
     when (group) {
         AvatarGroup.Group -> GroupAvatar(modifier, size, textStyle, type, names ?: emptyList())
         AvatarGroup.Multiple -> MultipleAvatar(

@@ -8,7 +8,6 @@ val Pink80 = Color(0xFFEFB8C8)
 val Purple40 = Color(0xFF6650a4)
 val PurpleGrey40 = Color(0xFF625b71)
 val Pink40 = Color(0xFF7D5260)
-
 // Neutral Colors
 val neutralPrimaryComponent = Color(0xFF1D1D1D)
 val neutralSecondaryComponent = Color(0xFF424242)

@@ -1,11 +1,14 @@
 package com.morg.component.button
 
 import androidx.compose.foundation.BorderStroke
+import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.RowScope
 import androidx.compose.foundation.layout.Spacer
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
-import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.shape.RoundedCornerShape
+import androidx.compose.material.icons.Icons
+import androidx.compose.material.icons.filled.Lock
 import androidx.compose.material3.Button
 import androidx.compose.material3.ButtonDefaults
 import androidx.compose.material3.Icon
@@ -29,14 +32,33 @@ import com.morg.component.util.theme.setId
 @Preview(showBackground = true)
 @Composable
 fun ButtonComponentPreview() {
-    ButtonComponent()
+    Column {
+        ButtonComponent(
+            modifier = Modifier.fillMaxWidth(),
+            drawableStart = Icons.Filled.Lock,
+            drawableEnd = Icons.Filled.Lock,
+            label = "Button"
+        )
+        ButtonComponent(
+            modifier = Modifier.fillMaxWidth(),
+            drawableEnd = Icons.Filled.Lock,
+            label = "Button"
+        )
+    }
 }
 
 /**
- * The ButtonComponent function is a composable function in Kotlin that creates a customizable button using Jetpack Compose. It takes several parameters to define its appearance and behavior, such as modifier, label, componentType, componentSize, componentColor, icon, underline, enabled, and onClick.
+ * The ButtonComponent function is a composable function in Kotlin that creates a customizable button using Jetpack Compose. This function allows developers to define various aspects of the button's appearance and behavior through its parameters.
  *
- * The modifier parameter allows you to apply custom modifications to the button, while label specifies the text to be displayed on the button. The componentType parameter determines the style of the button, which can be PRIMARY, SECONDARY, or TERTIARY. The componentSize parameter defines the size of the button, which can be SMALL, MEDIUM, or LARGE. The componentColor parameter sets the color of the button's content, and icon allows you to add an optional icon to the button. The underline parameter specifies whether the text label should be underlined, and enabled determines if the button is clickable. The onClick parameter is a callback function that is invoked when the button is clicked.  The function calculates the height of the button based on the componentSize parameter:
+ * The modifier parameter allows you to apply custom modifications to the button, such as setting its layout properties. The id parameter is an optional identifier for the button, which is used to set a unique layout ID:
  * ```
+ * modifier.layoutId("btn_\${setId(id, label)}")
+ * ```
+ *The label parameter specifies the text to be displayed on the button. The componentType parameter determines the style of the button, which can be PRIMARY, SECONDARY, or TERTIARY. The componentSize parameter defines the size of the button, which can be SMALL, MEDIUM, or LARGE. The componentColor parameter sets the color of the button's content.
+ *
+ * The drawableStart and drawableEnd parameters are optional icons that can be displayed at the start and end of the button, respectively. The underline parameter specifies whether the text label should be underlined. The enabled parameter determines whether the button is enabled or disabled. The onClick parameter is a callback function that is invoked when the button is clicked.
+ * The function calculates the height of the button based on the componentSize parameter
+ * ``` kotlin
  * val height = when (componentSize) {
  *     ComponentSize.SMALL -> 32.dp
  *     ComponentSize.MEDIUM -> 40.dp
@@ -53,19 +75,15 @@ fun ButtonComponentPreview() {
  * The buttonContent variable is a composable lambda that defines the content of the button, including the optional icon and the text label:
  * ```
  * val buttonContent: @Composable RowScope.() -> Unit = {
- *     icon?.let {
- *         Icon(
- *             imageVector = it,
- *             contentDescription = null,
- *             tint = Color.White
- *         )
- *         Spacer(modifier = Modifier.width(8.dp))
+ *     drawableStart?.let {
+ *         Icon(imageVector = it, contentDescription = null, tint = Color.White)
+ *         Spacer(modifier = Modifier.weight(1f))
  *     }
- *     Text(
- *         text = label,
- *         color = buttonColor,
- *         style = setTextComponentSize(componentSize).copy(textDecoration = textDecoration)
- *     )
+ *     Text(text = label, color = buttonColor, style = setTextComponentSize(componentSize).copy(textDecoration = textDecoration))
+ *     drawableEnd?.let {
+ *         Spacer(modifier = Modifier.weight(1f))
+ *         Icon(imageVector = it, contentDescription = null, tint = Color.White)
+ *     }
  * }
  * ```
  * The function sets the border stroke and button colors based on the componentType:
@@ -116,11 +134,13 @@ fun ButtonComponentPreview() {
  * }
  * ```
  * @param modifier The modifier to be applied to the button.
+ * @param id The optional ID for the button.
  * @param label The text label to be displayed on the button.
  * @param componentType The type of the button, which determines its style (PRIMARY, SECONDARY, TERTIARY).
  * @param componentSize The size of the button (SMALL, MEDIUM, LARGE).
  * @param componentColor The color of the button's content.
- * @param icon An optional icon to be displayed on the button.
+ * @param drawableStart An optional icon to be displayed at the start of the button.
+ * @param drawableEnd An optional icon to be displayed at the end of the button.
  * @param underline Whether the text label should be underlined.
  * @param enabled Whether the button is enabled or disabled.
  * @param onClick The callback to be invoked when the button is clicked.
@@ -133,7 +153,8 @@ fun ButtonComponent(
     componentType: ComponentType = ComponentType.PRIMARY,
     componentSize: ComponentSize = ComponentSize.MEDIUM,
     componentColor: Color = MaterialTheme.colorScheme.primary,
-    icon: ImageVector? = null,
+    drawableStart: ImageVector? = null,
+    drawableEnd: ImageVector? = null,
     underline: Boolean = false,
     enabled: Boolean = true,
     onClick: () -> Unit = {}
@@ -150,24 +171,27 @@ fun ButtonComponent(
     val buttonColor = if (componentType == ComponentType.PRIMARY) Color.White else componentColor
 
     val buttonContent: @Composable RowScope.() -> Unit = {
-        icon?.let {
+        drawableStart?.let {
             Icon(
-                imageVector = it,
-                contentDescription = null,
-                tint = Color.White
+                imageVector = it, contentDescription = null, tint = Color.White
             )
-            Spacer(modifier = Modifier.width(8.dp))
+            Spacer(modifier = Modifier.weight(1f))
         }
         Text(
             text = label,
             color = buttonColor,
             style = setTextComponentSize(componentSize).copy(textDecoration = textDecoration)
         )
+        drawableEnd?.let {
+            Spacer(modifier = Modifier.weight(1f))
+            Icon(
+                imageVector = it, contentDescription = null, tint = Color.White
+            )
+        }
     }
 
     val borderStroke = if (componentType == ComponentType.SECONDARY) BorderStroke(
-        1.dp,
-        componentColor
+        1.dp, componentColor
     ) else BorderStroke(0.dp, Color.Transparent)
     val buttonColors = if (componentType == ComponentType.TERTIARY) {
         ButtonDefaults.outlinedButtonColors(contentColor = Color.Transparent)

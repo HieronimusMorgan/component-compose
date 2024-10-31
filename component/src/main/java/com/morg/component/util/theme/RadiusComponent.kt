@@ -5,6 +5,22 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.dp
 
 /**
+ * The RadiusComponent object in Kotlin provides predefined radius values for UI components using Jetpack Compose. Each radius value is represented as a Dp (density-independent pixel), which ensures consistent sizing across different screen densities.
+ *
+ * The object defines several radius values, each with a descriptive name indicating its size. For example, Radius3Xs represents an extra extra extra small radius value of 2.dp:
+ * ``` kotlin
+ * val Radius3Xs: Dp
+ *    @Composable get() = 2.dp
+ *```
+ * Similarly, other radius values are defined, such as Radius2Xs for 4.dp, RadiusXs for 6.dp, and so on, up to Radius6Xl for 24.dp. Each of these values is annotated with @Composable, indicating that they can be used within composable functions.
+ *
+ * Additionally, the Full radius value is defined as 9999.dp, which can be used to create fully rounded components:
+ * ``` kotlin
+ * val Full: Dp
+ *     @Composable get() = 9999.dp
+ * ```
+ * These predefined radius values help maintain consistency in the UI design by providing a standard set of sizes that can be easily reused across different components.
+ *
  * Object that provides predefined radius values for UI components.
  * Each radius value is represented as a Dp (density-independent pixel).
  */

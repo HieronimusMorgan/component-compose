@@ -10,6 +10,7 @@ import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.sp
 import com.morg.component.R
 
+
 /**
  * Provides a TextStyle for Heading1.
  * @return TextStyle with specific font, size, line height, and letter spacing.
