@@ -4,7 +4,10 @@ import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
 import androidx.activity.enableEdgeToEdge
+import androidx.compose.foundation.Image
+import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
+import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
@@ -19,11 +22,16 @@ import androidx.compose.material3.Surface
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
+import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.res.painterResource
+import androidx.compose.ui.text.font.FontWeight
+import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.morg.component.button.ButtonComponent
 import com.morg.component.textfield.TextFieldComponent
 import com.morg.component.textfield.TextInputType
+import com.morg.component.util.theme.BodyLarge
 import com.morg.component.util.theme.ComponentSize
 import com.morg.component.util.theme.ComponentTheme
 import com.morg.component.util.theme.ComponentType
@@ -42,6 +50,90 @@ class MainActivity : ComponentActivity() {
                     }
                 }
             }
+        }
+    }
+}
+
+
+@Composable
+fun Login(modifier: Modifier = Modifier) {
+    Column(modifier = modifier.padding(16.dp)) {
+        Spacer(modifier = Modifier.height(90.dp))
+        Image(
+            painter = painterResource(id = R.drawable.ic_group_logo),
+            contentDescription = "App logo",
+            modifier = Modifier.fillMaxWidth() // Adjust size and alignment as needed
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        Text(
+            modifier = Modifier.fillMaxWidth(),
+            text = "Masuk ke Aplikasi GroUp",
+            style = BodyLarge,
+            fontWeight = FontWeight.Bold,
+            textAlign = TextAlign.Center
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        TextFieldComponent(
+            label = "Nama Pengguna",
+            value = "",
+            hint = "Masukkan nama pengguna/nomor ponsel",
+            componentSize = ComponentSize.LARGE,
+            onTextChanged = { /* handle text change */ }
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        TextFieldComponent(
+            label = "Kata Sandi",
+            value = "",
+            hint = "Masukkan kata sandi",
+            textInputType = TextInputType.PASSWORD,
+            componentSize = ComponentSize.LARGE,
+            onTextChanged = { /* handle text change */ }
+        )
+        Spacer(modifier = Modifier.height(8.dp))
+        Row(modifier = Modifier.fillMaxWidth()) {
+            Spacer(modifier = Modifier.weight(1f))
+            Text(
+                modifier = Modifier.clickable { },
+                text = "Lupa kata sandi?",
+                style = BodyLarge,
+                color = Color.Red,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.End,
+            )
+        }
+        Spacer(modifier = Modifier.weight(1f))
+        ButtonComponent(
+            modifier = Modifier.fillMaxWidth(),
+            label = "Masuk",
+            componentColor = Color.Red,
+            componentSize = ComponentSize.LARGE
+        )
+        Spacer(modifier = Modifier.height(16.dp))
+        Row(modifier = Modifier.fillMaxWidth()) {
+            Spacer(modifier = Modifier.weight(1f))
+            Text(
+                modifier = Modifier.clickable { },
+                text = "Belum punya akun? Daftar",
+                style = BodyLarge,
+                color = Color.Red,
+                fontWeight = FontWeight.Bold,
+                textAlign = TextAlign.End,
+            )
+            Spacer(modifier = Modifier.weight(1f))
+        }
+    }
+}
+
+@Preview(showBackground = true)
+@Composable
+fun LoginPreview() {
+    ComponentTheme {
+        Scaffold {
+            Login(
+                modifier = Modifier
+                    .fillMaxSize()
+                    .padding(it)
+            )
         }
     }
 }
@@ -225,7 +317,7 @@ fun Greeting(modifier: Modifier = Modifier) {
     }
 }
 
-@Preview(showBackground = true)
+//@Preview(showBackground = true)
 @Composable
 fun GreetingPreview() {
     ComponentTheme {

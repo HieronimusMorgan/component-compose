@@ -75,6 +75,7 @@ fun ButtonIconComponentPreview() {
         Spacer(modifier = Modifier.size(16.dp))
         Row {
             ButtonIconComponent(
+                id = "btn_icon_tertiary_small",
                 componentSize = ComponentSize.SMALL,
                 componentType = ComponentType.TERTIARY,
                 icon = Icons.Default.Add

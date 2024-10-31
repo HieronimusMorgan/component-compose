@@ -215,7 +215,7 @@ fun ButtonComponent(
             shape = RoundedCornerShape(8.dp),
             enabled = enabled,
             modifier = modifier.height(height),
-            colors = ButtonDefaults.buttonColors(),
+            colors = ButtonDefaults.buttonColors(componentColor),
             content = buttonContent
         )
     }
