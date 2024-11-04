@@ -31,8 +31,15 @@ object SpacingComponent {
         @Composable get() = 0.dp
 
     /**
+     * Small spacing value (1.dp).
+     */
+    val Sm1: Dp
+        @Composable get() = 1.dp
+
+    /**
      * Small spacing value (2.dp).
      */
+
     val Sm2: Dp
         @Composable get() = 2.dp
 

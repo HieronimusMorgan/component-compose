@@ -73,6 +73,7 @@ dependencies {
     implementation(libs.androidx.material.icons.extended)
     implementation(libs.coil.compose)
     implementation(libs.androidx.runtime)
+    implementation(libs.androidx.constraintlayout.compose)
 }
 
 afterEvaluate {
