@@ -103,7 +103,21 @@ fun AvatarComponentPreview() {
                 )
             }
             Spacer(modifier = Modifier.height(8.dp))
-
+            AvatarComponent(
+                modifier = Modifier,
+                id = "avatar_1",
+                name = "John Doe",
+                size = AvatarSize.ExtraLarge2,
+                textStyle = BodyMedium,
+                icon = Icons.Filled.Person,
+                type = AvatarType.Default,
+                names = null,
+                avatarCounter = 0,
+                badge = null,
+                group = null,
+                isSelected = false,
+                notification = null
+            )
         }
     }
 }

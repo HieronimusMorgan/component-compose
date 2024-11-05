@@ -88,9 +88,14 @@ fun ButtonIconComponentPreview() {
             )
             Spacer(modifier = Modifier.size(16.dp))
             ButtonIconComponent(
-                componentSize = ComponentSize.LARGE,
+                modifier = Modifier,
+                id = "btn_icon_tertiary_large",
                 componentType = ComponentType.TERTIARY,
-                icon = Icons.Default.Add
+                componentSize = ComponentSize.LARGE,
+                icon = Icons.Default.Add,
+                iconColor = Color.Black,
+                enabled = true,
+                onClick = {/* Handle button click */ }
             )
         }
     }

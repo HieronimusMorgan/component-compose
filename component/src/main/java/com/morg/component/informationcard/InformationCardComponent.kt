@@ -205,7 +205,7 @@ fun InformationCardComponent(
                             top.linkTo(parent.top, margin = 12.dp)
                             start.linkTo(parent.start, margin = 12.dp)
                         }
-                        .size(24.dp),
+                        .size(16.dp),
                     contentScale = ContentScale.Fit)
 
                 Image(imageVector = closeImage,
