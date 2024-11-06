@@ -53,9 +53,7 @@ import com.morg.component.util.theme.setId
 @Composable
 fun CardComponentPreview() {
     Column {
-//        CardComponent(
-//            title = "Title adsadasdweqwe q asd qw asdw dsa sdqwd asda dq wd",
-//            onItemClicked = {})
+
 //        val map = mapOf(
 //            "Key 1" to "Value 1",
 //            "Key 2" to "Value 2",
@@ -69,18 +67,33 @@ fun CardComponentPreview() {
 //            styleMapTitle = TitleLarge.merge(TextStyle(fontWeight = FontWeight.Bold)),
 //            map = map,
 //            onItemClicked = {})
-        val productModel = CardProductModel(
-            productImage = "https://res.cloudinary.com/dk0z4ums3/image/upload/v1714982141/attached_image/bear-brand-0-alodokter.jpg",
-            productName = "Product Name",
-            productPrice = 1000.0,
-            productPricePromo = 1000.0,
-            isPromo = false,
-            productDescription = "Product Description"
-        )
+//        val productModel = CardProductModel(
+//            productImage = "https://res.cloudinary.com/dk0z4ums3/image/upload/v1714982141/attached_image/bear-brand-0-alodokter.jpg",
+//            productName = "Product Name",
+//            productPrice = 1000.0,
+//            productPricePromo = 1000.0,
+//            isPromo = false,
+//            productDescription = "Product Description"
+//        )
+//        CardComponent(
+//            cardType = CardType.ProductLandscape,
+//            productModel = productModel,
+//            onItemClicked = {})
         CardComponent(
-            cardType = CardType.ProductLandscape,
-            productModel = productModel,
-            onItemClicked = {})
+            modifier = Modifier,
+            id = "card_1",
+            title = "Title",
+            styleTitle = TitleSmall,
+            description = "Description",
+            styleDescription = BodyMedium,
+            map = null,
+            styleMapTitle = BodyMedium,
+            styleMapValue = BodyMedium,
+            cardType = CardType.List,
+            cardStyle = CardStyle.Color,
+            color = Color.White,
+            productModel = null,
+            onItemClicked = {/* Handle item click */ })
     }
 }
 

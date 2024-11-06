@@ -72,13 +72,13 @@ fun AvatarComponentPreview() {
             Text(text = "Avatar Component Group and Multiple")
             Spacer(modifier = Modifier.height(8.dp))
             AvatarComponent(
-                names = listOf("John WE", "asdd", "asdasd"),
+                listName = listOf("John WE", "asdd", "asdasd"),
                 type = AvatarType.Initial,
                 group = AvatarGroup.Group
             )
             Spacer(modifier = Modifier.height(8.dp))
             AvatarComponent(
-                names = listOf("John WE", "asdd", "asdasd"),
+                listName = listOf("John WE", "asdd", "asdasd"),
                 avatarCounter = 5,
                 type = AvatarType.Initial,
                 group = AvatarGroup.Multiple
@@ -111,7 +111,7 @@ fun AvatarComponentPreview() {
                 textStyle = BodyMedium,
                 icon = Icons.Filled.Person,
                 type = AvatarType.Default,
-                names = null,
+                listName = null,
                 avatarCounter = 0,
                 badge = null,
                 group = null,
@@ -195,7 +195,7 @@ fun AvatarComponentPreview() {
  * @param textStyle Text style to be applied to the initials.
  * @param icon Icon to be displayed in the avatar.
  * @param type Type of the avatar (Default or Initial).
- * @param names List of names for group or multiple avatars.
+ * @param listName List of names for group or multiple avatars.
  * @param avatarCounter Number of avatars to be displayed in multiple avatar mode.
  * @param badge Optional badge to be displayed on the avatar.
  * @param group Group type of the avatar (Group or Multiple).
@@ -211,7 +211,7 @@ fun AvatarComponent(
     textStyle: TextStyle = BodyMedium,
     icon: ImageVector = Icons.Filled.Person,
     type: AvatarType = AvatarType.Default,
-    names: List<String>? = null,
+    listName: List<String>? = null,
     avatarCounter: Int = 0,
     badge: AvatarBadge? = null,
     group: AvatarGroup? = null,
@@ -220,14 +220,14 @@ fun AvatarComponent(
 ) {
     modifier.layoutId("avatar_${setId(id, name ?: "")}")
     when (group) {
-        AvatarGroup.Group -> GroupAvatar(modifier, size, textStyle, type, names ?: emptyList())
+        AvatarGroup.Group -> GroupAvatar(modifier, size, textStyle, type, listName ?: emptyList())
         AvatarGroup.Multiple -> MultipleAvatar(
             modifier,
             size,
             textStyle,
             type,
             avatarCounter,
-            names ?: emptyList()
+            listName ?: emptyList()
         )
 
         else -> {

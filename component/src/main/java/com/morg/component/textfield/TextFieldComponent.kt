@@ -91,6 +91,32 @@ fun Preview() {
             onDropdownOptionSelected = {/* Handle country code selection */ },
             hint = "Choose from the list"
         )
+
+        TextFieldComponent(
+            modifier = Modifier,
+            id = "txt_1",
+            labelModifier = Modifier,
+            textStyleLabel = BodyMedium,
+            label = "Password",
+            value = "",
+            readOnly = false,
+            enable = true,
+            hint = "",
+            onImeAction = ImeAction.Done,
+            componentSize = ComponentSize.LARGE,
+            singleLine = true,
+            textInputType = TextInputType.NORMAL,
+            suffixIconImages = null,
+            prefixIconImages = null,
+            prefixText = null,
+            onClickIcon = { /* handle icon click */ },
+            onTextChanged = { /* handle text change */ },
+            countryCodes = emptyList(),
+            countryCode = "+62",
+            onCountryCodeClick = { /* handle country code selection */ },
+            dropdownOptions = emptyList(),
+            onDropdownOptionSelected = { /* handle dropdown option selection */ },
+        )
     }
 }
 

@@ -26,7 +26,13 @@ import com.morg.component.util.theme.BodyMedium
 @Preview(showBackground = true)
 @Composable
 fun OtpScreenPreview() {
-    OtpVerification(otpLength = 6, isPassword = true) { otp ->
+    OtpVerification(
+        modifier = Modifier,
+        textStyle = BodyMedium,
+        width = 48.dp,
+        otpLength = 6,
+        isPassword = true
+    ) { otp ->
         println("Complete OTP: $otp")
     }
 }

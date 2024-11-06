@@ -40,9 +40,17 @@ fun ButtonComponentPreview() {
             label = "Button"
         )
         ButtonComponent(
-            modifier = Modifier.fillMaxWidth(),
-            drawableEnd = Icons.Filled.Lock,
-            label = "Button"
+            modifier = Modifier,
+            id = "btn_1",
+            label = "Button",
+            componentType = ComponentType.PRIMARY,
+            componentSize = ComponentSize.MEDIUM,
+            componentColor = MaterialTheme.colorScheme.primary,
+            drawableStart = null,
+            drawableEnd = null,
+            underline = false,
+            enabled = true,
+            onClick = {},
         )
     }
 }
