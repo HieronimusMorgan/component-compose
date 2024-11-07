@@ -105,7 +105,7 @@ fun Preview() {
             onImeAction = ImeAction.Done,
             componentSize = ComponentSize.LARGE,
             singleLine = true,
-            textInputType = TextInputType.NORMAL,
+            textInputType = TextInputType.TEXT,
             suffixIconImages = null,
             prefixIconImages = null,
             prefixText = null,
@@ -121,105 +121,31 @@ fun Preview() {
 }
 
 /**
- * The TextFieldComponent function is a composable function in Kotlin that creates a customizable text field component using Jetpack Compose. This function allows developers to specify various parameters to tailor the text field's appearance and behavior.  The function signature includes several parameters with default values, such as modifier, labelModifier, textStyleLabel, label, value, hint, onImeAction, componentSize, singleLine, textInputType, onTextChanged, and more. These parameters provide flexibility in customizing the text field. For example, componentSize determines the text field's size (SMALL, MEDIUM, LARGE), and textInputType specifies the type of input (NORMAL, PASSWORD, PHONE, SEARCH, DROPDOWN).
+ * Composable function to create a customizable text field component.
  *
- * ``` kotlin
- * fun TextFieldComponent(
- *     modifier: Modifier = Modifier,
- *     labelModifier: Modifier = Modifier,
- *     textStyleLabel: TextStyle = BodyMedium,
- *     label: String = "",
- *     value: String = "",
- *     hint: String = "Enter text here",
- *     onImeAction: ImeAction = ImeAction.Done,
- *     componentSize: ComponentSize = ComponentSize.LARGE,
- *     singleLine: Boolean = true,
- *     textInputType: TextInputType = TextInputType.NORMAL,
- *     onTextChanged: (String) -> Unit = {}
- * )
- * ```
- * The function uses a Column composable to arrange the label and text field vertically. If a label is provided, it is displayed above the text field using the LabelSection composable, which applies the specified textStyleLabel and labelModifier.
- * ```kotlin
- * Column {
- *     LabelSection(label, labelModifier, textStyleLabel, componentSize)
- *     // TextField logic here
- * }
- * ```
- * Depending on the textInputType, the function creates different types of text fields. For example, if the textInputType is PASSWORD, it creates a password text field with a visibility toggle icon. If the textInputType is PHONE, it creates a text field with a country code prefix. For other types, it creates a standard text field.
- * ```kotlin
- * when (textInputType) {
- *     TextInputType.PASSWORD -> {
- *         // Password text field logic
- *     }
- *     TextInputType.PHONE -> {
- *         // Phone number text field logic
- *     }
- *     TextInputType.DROPDOWN -> {
- *         // Dropdown text field logic
- *     }
- *     else -> {
- *         // Standard text field logic
- *     }
- * }
- * ```
- * The TextField composable is used to create the actual text field. It includes logic for handling text changes, focus changes, and IME actions. The BasicTextField composable is used to render the text input, and it is styled based on the provided parameters.
- * ```kotlin
- * BasicTextField(
- *     value = text,
- *     onValueChange = onTextChanged,
- *     textStyle = TextStyle.Default.copy(
- *         color = MaterialTheme.colorScheme.onSurface,
- *         fontSize = fontSizeForComponentSize(componentSize)
- *     ),
- *     singleLine = singleLine,
- *     modifier = modifier.onFocusChanged { onFocusChanged(it.isFocused) },
- *     decorationBox = { innerTextField ->
- *         if (text.isEmpty()) Text(
- *             hint,
- *             color = Color.Gray,
- *             style = TextStyle(fontSize = fontSizeForComponentSize(componentSize))
- *         )
- *         innerTextField()
- *     },
- *     keyboardOptions = KeyboardOptions.Default.copy(
- *         keyboardType = when (textInputType) {
- *             TextInputType.PHONE -> KeyboardType.Phone
- *             TextInputType.PASSWORD -> KeyboardType.Password
- *             else -> KeyboardType.Text
- *         }, imeAction = onImeAction
- *     ),
- *     keyboardActions = KeyboardActions(onAny = {
- *         keyboardController?.hide()
- *         focusManager.clearFocus()
- *     }),
- *     visualTransformation = if (textInputType == TextInputType.PASSWORD) PasswordVisualTransformation() else VisualTransformation.None
- * )
- * ```
- * The TextFieldComponent function is highly customizable and can be used to create various types of text fields with different behaviors and appearances, making it a versatile component in a Jetpack Compose application.
- *
- * @param modifier The modifier to be applied to the text field.
- * @param id The optional ID for the text field.
- * @param labelModifier The modifier to be applied to the label.
- * @param textStyleLabel The text style to be applied to the label.
- * @param label The text label to be displayed above the text field.
+ * @param modifier Modifier to be applied to the text field.
+ * @param id Optional ID for the text field.
+ * @param labelModifier Modifier to be applied to the label.
+ * @param textStyleLabel Text style for the label.
+ * @param label The label text to be displayed above the text field.
  * @param value The current text value of the text field.
  * @param readOnly Whether the text field is read-only.
  * @param enable Whether the text field is enabled.
- * @param hint The hint text to be displayed when the text field is empty.
- * @param onImeAction The IME action to be performed.
- * @param componentSize The size of the text field (SMALL, MEDIUM, LARGE).
+ * @param hint Hint text to be displayed when the text field is empty.
+ * @param onImeAction IME action to be performed.
+ * @param componentSize Size of the text field component.
  * @param singleLine Whether the text field is single-line.
- * @param textInputType The type of the text input (NORMAL, PASSWORD, PHONE, SEARCH, DROPDOWN).
- * @param suffixIconImages A pair of optional suffix icons to be displayed in the text field.
- * @param prefixIconImages A pair of optional prefix icons to be displayed in the text field.
- * @param prefixText An optional prefix text to be displayed in the text field.
- * @param onClickIcon The callback to be invoked when an icon is clicked.
- * @param onTextChanged The callback to be invoked when the text value changes.
- * @param countryCodes A list of country codes for phone number input.
- * @param countryCode The selected country code for phone number input.
- * @param onCountryCodeClick The callback to be invoked when a country code is selected.
- * @param dropdownOptions A list of options for the dropdown input.
- * @param onDropdownOptionSelected The callback to be invoked when a dropdown option is selected.
+ * @param textInputType Type of text input (e.g., TEXT, PASSWORD, PHONE, DROPDOWN).
+ * @param suffixIconImages Optional pair of suffix icons.
+ * @param prefixIconImages Optional pair of prefix icons.
+ * @param prefixText Optional prefix text to be displayed inside the text field.
+ * @param onClickIcon Callback function to be invoked when an icon is clicked.
+ * @param onTextChanged Callback function to be invoked when the text changes.
+ * @param countryCodes List of country codes for phone number input.
+ * @param countryCode Default country code for phone number input.
+ * @param onCountryCodeClick Callback function to be invoked when a country code is selected.
+ * @param dropdownOptions List of options for dropdown input.
+ * @param onDropdownOptionSelected Callback function to be invoked when a dropdown option is selected.
  */
 @Composable
 fun TextFieldComponent(
@@ -235,7 +161,7 @@ fun TextFieldComponent(
     onImeAction: ImeAction = ImeAction.Done,
     componentSize: ComponentSize = ComponentSize.LARGE,
     singleLine: Boolean = true,
-    textInputType: TextInputType = TextInputType.NORMAL,
+    textInputType: TextInputType = TextInputType.TEXT,
     suffixIconImages: Pair<ImageVector?, ImageVector?>? = null,
     prefixIconImages: Pair<ImageVector?, ImageVector?>? = null,
     prefixText: String? = null,
@@ -272,7 +198,7 @@ fun TextFieldComponent(
                     isFocused = isFocused,
                     componentSize = componentSize,
                     singleLine = singleLine,
-                    textInputType = if (passwordVisibility) TextInputType.NORMAL else TextInputType.PASSWORD,
+                    textInputType = if (passwordVisibility) TextInputType.TEXT else TextInputType.PASSWORD,
                     onImeAction = onImeAction,
                     prefixText = prefixText,
                     prefixIconImages = prefixIconImages,
@@ -742,5 +668,5 @@ fun iconSizeForComponentSize(componentSize: ComponentSize): Dp {
 }
 
 enum class TextInputType {
-    NORMAL, PASSWORD, PHONE, DROPDOWN
+    TEXT, PASSWORD, PHONE, DROPDOWN
 }

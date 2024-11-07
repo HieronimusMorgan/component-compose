@@ -57,16 +57,31 @@ import com.morg.component.util.theme.colorBorderWarningWeak
 @Preview(showBackground = true)
 @Composable
 fun InformationCardComponentPreview() {
-    Column(modifier = Modifier
-        .padding(16.dp)
-        .verticalScroll(rememberScrollState())) {
+    Column(
+        modifier = Modifier
+            .padding(16.dp)
+            .verticalScroll(rememberScrollState())
+    ) {
         InformationCardType.entries.forEach { type ->
-            InformationCardComponent(title = type.name,
+            InformationCardComponent(
+                modifier = Modifier.fillMaxWidth(),
+                title = type.name,
+                titleStyle = CaptionLarge,
+                titleFontWeight = FontWeight.Bold,
                 description = "This warning in Android Studio's Layout Editor is just a note indicating that the preview tool currently only supports rendering up to API level 34. If you're targeting a higher API, the preview might not accurately reflect how the layout would look or behave on devices with newer APIs, especially if you’re using features that were added after API 34.",
+                descriptionStyle = CaptionMedium,
+                descriptionFontWeight = FontWeight.Normal,
+                iconImage = R.drawable.ic_warning_component,
+                closeImage = Icons.Filled.Close,
+                backgroundColor = Color.Transparent,
+                borderColor = Color.Transparent,
+                buttonType = ComponentType.TERTIARY,
                 buttonLabel = "Action",
-                type = type,
+                buttonColor = Color.Black,
                 onClose = { /* Handle close */ },
-                onSubmit = { /* Handle submit */ })
+                onSubmit = { /* Handle submit */ },
+                type = InformationCardType.SUCCESS,
+            )
             Spacer(modifier = Modifier.height(16.dp))
         }
     }
