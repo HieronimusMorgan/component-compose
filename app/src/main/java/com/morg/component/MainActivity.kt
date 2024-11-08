@@ -1,5 +1,6 @@
 package com.morg.component
 
+import StepperComponent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -29,6 +30,7 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import com.morg.component.button.ButtonComponent
+import com.morg.component.button.ButtonIconComponent
 import com.morg.component.textfield.TextFieldComponent
 import com.morg.component.textfield.TextInputType
 import com.morg.component.util.theme.BodyLarge
@@ -47,6 +49,8 @@ class MainActivity : ComponentActivity() {
                         modifier = Modifier.padding(innerPadding)
                     ) {
                         Greeting()
+                        ButtonIconComponent()
+                        Text(text = "Hello, world!")
                     }
                 }
             }
@@ -119,7 +123,7 @@ fun Login(modifier: Modifier = Modifier) {
                 fontWeight = FontWeight.Bold,
                 textAlign = TextAlign.End,
             )
-            Spacer(modifier = Modifier.weight(1f))
+            StepperComponent()
         }
     }
 }
@@ -314,6 +318,8 @@ fun Greeting(modifier: Modifier = Modifier) {
             },
             hint = "Choose from the list"
         )
+        Spacer(modifier = Modifier.height(5.dp))
+        StepperComponent()
     }
 }
 
