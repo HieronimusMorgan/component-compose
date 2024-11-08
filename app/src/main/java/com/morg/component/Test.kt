@@ -20,12 +20,12 @@ import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
-import com.morg.component.button.ButtonComponent
-import com.morg.component.textfield.TextFieldComponent
-import com.morg.component.textfield.TextInputType
-import com.morg.component.util.theme.BodyMedium
-import com.morg.component.util.theme.ComponentSize
-import com.morg.component.util.theme.ComponentType
+import co.id.nexsoft.component.button.ButtonComponent
+import co.id.nexsoft.component.textfield.TextFieldComponent
+import co.id.nexsoft.component.textfield.TextInputType
+import co.id.nexsoft.component.util.theme.BodyMedium
+import co.id.nexsoft.component.util.theme.ComponentSize
+import co.id.nexsoft.component.util.theme.ComponentType
 
 @Preview(showBackground = true)
 @Composable

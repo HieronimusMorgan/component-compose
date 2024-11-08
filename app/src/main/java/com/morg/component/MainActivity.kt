@@ -1,6 +1,5 @@
 package com.morg.component
 
-import StepperComponent
 import android.os.Bundle
 import androidx.activity.ComponentActivity
 import androidx.activity.compose.setContent
@@ -29,14 +28,15 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
-import com.morg.component.button.ButtonComponent
-import com.morg.component.button.ButtonIconComponent
-import com.morg.component.textfield.TextFieldComponent
-import com.morg.component.textfield.TextInputType
-import com.morg.component.util.theme.BodyLarge
-import com.morg.component.util.theme.ComponentSize
-import com.morg.component.util.theme.ComponentTheme
-import com.morg.component.util.theme.ComponentType
+import co.id.nexsoft.component.button.ButtonComponent
+import co.id.nexsoft.component.button.ButtonIconComponent
+import co.id.nexsoft.component.stepper.StepperComponent
+import co.id.nexsoft.component.textfield.TextFieldComponent
+import co.id.nexsoft.component.textfield.TextInputType
+import co.id.nexsoft.component.util.theme.BodyLarge
+import co.id.nexsoft.component.util.theme.ComponentSize
+import co.id.nexsoft.component.util.theme.ComponentTheme
+import co.id.nexsoft.component.util.theme.ComponentType
 
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {

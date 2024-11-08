@@ -20,15 +20,19 @@ import com.google.android.exoplayer2.ui.PlayerView
 @Composable
 fun VideoComponentPreview() {
     VideoComponent(
+        modifier = Modifier,
         videoUri = "https://www.learningcontainer.com/wp-content/uploads/2020/05/sample-mp4-file.mp4",
-        componentSize = ComponentSize.MEDIUM
+        componentSize = ComponentSize.MEDIUM,
+        videoComponent = VideoComponent.GOLDEN,
+        autoPlay = true,
+        repeat = true
     )
 }
 
 @Composable
 fun VideoComponent(
-    videoUri: String,
     modifier: Modifier = Modifier,
+    videoUri: String,
     componentSize: ComponentSize = ComponentSize.MEDIUM,
     videoComponent: VideoComponent = VideoComponent.GOLDEN,
     autoPlay: Boolean = true,

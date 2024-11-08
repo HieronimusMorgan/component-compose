@@ -40,6 +40,7 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
+import co.id.nexsoft.component.R
 import co.id.nexsoft.component.button.ButtonComponent
 import co.id.nexsoft.component.util.theme.CaptionLarge
 import co.id.nexsoft.component.util.theme.CaptionMedium
@@ -52,7 +53,6 @@ import co.id.nexsoft.component.util.theme.colorBorderDangerWeak
 import co.id.nexsoft.component.util.theme.colorBorderInfoWeak
 import co.id.nexsoft.component.util.theme.colorBorderSuccessWeak
 import co.id.nexsoft.component.util.theme.colorBorderWarningWeak
-import com.morg.component.R
 
 @Preview(showBackground = true)
 @Composable

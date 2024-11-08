@@ -25,16 +25,24 @@ import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.constraintlayout.compose.ConstraintLayout
 import androidx.constraintlayout.compose.Dimension
+import co.id.nexsoft.component.R
 import co.id.nexsoft.component.util.theme.BodyLarge
 import co.id.nexsoft.component.util.theme.BodyMedium
 import co.id.nexsoft.component.util.theme.BodySmall
 import co.id.nexsoft.component.util.theme.ComponentSize
-import com.morg.component.R
 
 @Preview(showBackground = true)
 @Composable
 fun RoundedInputStepperPreview() {
-    StepperComponent()
+    StepperComponent(
+        initialValue = 0,
+        minValue = 0,
+        maxValue = 10000,
+        componentSize = ComponentSize.SMALL,
+        iconColor = Color.Black,
+        borderColor = Color.Gray,
+        onValueChange = { /* Add your logic here */ }
+    )
 }
 
 @Composable
@@ -46,9 +54,12 @@ fun StepperComponent(
     componentSize: ComponentSize = ComponentSize.SMALL,
     iconColor: Color = Color.Black,
     borderColor: Color = Color.Gray,
+    onValueChange: (Int) -> Unit = {}
 ) {
     var value by remember { mutableIntStateOf(initialValue) }
     var textValue by remember { mutableStateOf(TextFieldValue(value.toString())) }
+
+    onValueChange(value)
 
     val iconSizeModifier = when (componentSize) {
         ComponentSize.SMALL -> Modifier.size(20.dp)

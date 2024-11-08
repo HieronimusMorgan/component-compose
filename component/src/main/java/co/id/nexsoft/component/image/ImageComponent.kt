@@ -14,17 +14,24 @@ import androidx.compose.ui.platform.LocalContext
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import co.id.nexsoft.component.R
 import co.id.nexsoft.component.util.theme.ComponentSize
 import coil.compose.AsyncImage
 import coil.request.ImageRequest
 import coil.transform.CircleCropTransformation
-import com.morg.component.R
 
 @Preview(showBackground = true)
 @Composable
 fun ImageComponentPreview() {
     Column(modifier = Modifier.fillMaxWidth()) {
-        ImageComponent(componentSize = ComponentSize.SMALL)
+        ImageComponent(
+            modifier = Modifier,
+            contentDescription = null,
+            url = null,
+            drawableId = R.drawable.ic_no_image_grey_component,
+            componentSize = ComponentSize.SMALL,
+            imageComponent = ImageComponent.GOLDEN
+        )
         Spacer(modifier = Modifier.height(16.dp))
         ImageComponent(componentSize = ComponentSize.MEDIUM)
         Spacer(modifier = Modifier.height(16.dp))

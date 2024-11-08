@@ -36,6 +36,7 @@ import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import co.id.nexsoft.component.R
 import co.id.nexsoft.component.button.ButtonComponent
 import co.id.nexsoft.component.util.model.CardProductModel
 import co.id.nexsoft.component.util.theme.BodyMedium
@@ -47,7 +48,6 @@ import coil.compose.AsyncImage
 import coil.compose.rememberAsyncImagePainter
 import coil.request.ImageRequest
 import coil.transform.CircleCropTransformation
-import com.morg.component.R
 
 @Preview(showBackground = true)
 @Composable
