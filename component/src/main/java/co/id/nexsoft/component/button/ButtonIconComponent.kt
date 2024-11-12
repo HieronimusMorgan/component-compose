@@ -8,6 +8,7 @@ import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Row
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.size
+import androidx.compose.foundation.shape.CircleShape
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
 import androidx.compose.material.icons.filled.Add
@@ -95,8 +96,10 @@ fun ButtonIconComponentPreview() {
                 icon = Icons.Default.Add,
                 iconColor = Color.Black,
                 enabled = true,
+                isCircle = false, //Add Props for circle shape
                 onClick = {/* Handle button click */ }
             )
+
         }
     }
 }
@@ -111,6 +114,7 @@ fun ButtonIconComponent(
     icon: ImageVector = Icons.Filled.Add,
     iconColor: Color = Color.Black,
     enabled: Boolean = true,
+    isCircle: Boolean = false,
     onClick: () -> Unit = {}
 ) {
     modifier.layoutId("btn_icon_${setId(id, "")}")
@@ -127,13 +131,15 @@ fun ButtonIconComponent(
         ComponentType.TERTIARY -> BorderStroke(0.dp, color)
         ComponentType.PRIMARY, ComponentType.SECONDARY -> BorderStroke(1.dp, componentColor)
     }
+
+    val shape = if (isCircle) CircleShape else RoundedCornerShape(4.dp)
     Box(
         modifier = modifier// Size of the Box
-            .clip(RoundedCornerShape(4.dp))
+            .clip(shape)
             .background(color)
             .border(
                 borderTertiary, // Outline with negative color
-                RoundedCornerShape(4.dp) // Match the corner shape of the box
+                shape // Match the corner shape of the box
             )
     ) {
         IconButton(

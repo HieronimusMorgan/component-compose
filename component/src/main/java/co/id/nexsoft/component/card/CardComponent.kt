@@ -17,7 +17,6 @@ import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.layout.wrapContentHeight
 import androidx.compose.foundation.shape.RoundedCornerShape
 import androidx.compose.material.icons.Icons
-import androidx.compose.material.icons.automirrored.filled.ArrowRight
 import androidx.compose.material.icons.filled.MoreVert
 import androidx.compose.material3.Card
 import androidx.compose.material3.CardDefaults
@@ -29,9 +28,9 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
@@ -41,6 +40,7 @@ import co.id.nexsoft.component.button.ButtonComponent
 import co.id.nexsoft.component.util.model.CardProductModel
 import co.id.nexsoft.component.util.theme.BodyMedium
 import co.id.nexsoft.component.util.theme.ComponentSize
+import co.id.nexsoft.component.util.theme.ImageSource
 import co.id.nexsoft.component.util.theme.SpacingComponent
 import co.id.nexsoft.component.util.theme.TitleSmall
 import co.id.nexsoft.component.util.theme.setId
@@ -93,6 +93,7 @@ fun CardComponentPreview() {
             cardStyle = CardStyle.Color,
             color = Color.White,
             productModel = null,
+            icon = ImageSource.DrawableResource(R.drawable.ic_group_logo),
             onItemClicked = {/* Handle item click */ })
     }
 }
@@ -187,6 +188,7 @@ fun CardComponent(
     cardStyle: CardStyle = CardStyle.Color,
     color: Color = Color.White,
     productModel: CardProductModel? = null,
+    icon: ImageSource? = null,
     onItemClicked: () -> Unit = {}
 ) {
     modifier.layoutId("card_${setId(id, "")}")
@@ -200,6 +202,7 @@ fun CardComponent(
                 styleDescription = styleDescription,
                 cardStyle = cardStyle,
                 color = color,
+                icon = icon,
                 onItemClicked = onItemClicked
             )
         }
@@ -427,7 +430,7 @@ fun CardList(
     styleTitle: TextStyle = TitleSmall,
     description: String? = "Description",
     styleDescription: TextStyle = BodyMedium,
-    icon: ImageVector = Icons.AutoMirrored.Filled.ArrowRight,
+    icon: ImageSource? = null,
     cardStyle: CardStyle,
     color: Color,
     onItemClicked: () -> Unit = {}
@@ -453,22 +456,22 @@ fun CardList(
     }, onClick = { onItemClicked() }) {
         Row(
             modifier = Modifier
-                .padding(SpacingComponent.Md16)
-                .fillMaxWidth()
-                .wrapContentHeight(),
+                .padding(SpacingComponent.Md16),
             horizontalArrangement = Arrangement.Start,
             verticalAlignment = Alignment.CenterVertically
         ) {
             Column(
                 modifier = Modifier
-                    .weight(1f)
-                    .padding(end = SpacingComponent.Sm8)
             ) {
                 Text(
+                    modifier = Modifier,
                     text = title, style = styleTitle, color = MaterialTheme.colorScheme.onSurface
                 )
                 if (description != null) {
-                    Spacer(modifier = Modifier.height(SpacingComponent.Sm10))
+                    Spacer(
+                        modifier = Modifier
+                            .height(SpacingComponent.Sm10)
+                    )
                     Text(
                         text = description,
                         style = styleDescription,
@@ -476,12 +479,31 @@ fun CardList(
                     )
                 }
             }
-            Icon(
-                modifier = Modifier.weight(0.1f),
-                imageVector = icon,
-                contentDescription = null,
-                tint = MaterialTheme.colorScheme.onSurface
-            )
+            Spacer(modifier = Modifier.weight(1f))
+            icon?.let {
+                when (icon) {
+                    is ImageSource.VectorImage -> {
+                        Icon(
+                            imageVector = icon.imageVector,
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
+
+                    is ImageSource.DrawableResource -> {
+                        Icon(
+                            modifier = Modifier,
+                            painter = painterResource(id = icon.resId),
+                            contentDescription = null,
+                            tint = MaterialTheme.colorScheme.onSurface
+                        )
+                    }
+
+                    is ImageSource.UrlImage -> {
+                    }
+                }
+            }
+
         }
     }
 }

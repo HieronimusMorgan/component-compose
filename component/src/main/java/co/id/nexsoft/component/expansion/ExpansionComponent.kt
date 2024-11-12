@@ -81,7 +81,6 @@ fun ExpandableCard(
     Box(
         modifier = Modifier
             .fillMaxWidth()
-            .padding(16.dp)
     ) {
         Column(
             modifier = Modifier.fillMaxWidth()
@@ -92,9 +91,9 @@ fun ExpandableCard(
                 modifier = Modifier
                     .fillMaxWidth()
                     .clickable { expanded = !expanded }
-                    .padding(8.dp)
             ) {
                 Text(
+                    modifier = Modifier.padding(4.dp),
                     text = title,
                     style = MaterialTheme.typography.titleMedium.copy(fontWeight = FontWeight.Bold)
                 )

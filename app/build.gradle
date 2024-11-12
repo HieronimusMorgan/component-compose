@@ -71,4 +71,5 @@ dependencies {
     implementation(libs.ui.tooling)
     implementation(libs.ui.tooling.preview)
     implementation(libs.coil.compose)
+    implementation("io.morfly.compose:advanced-bottomsheet-material3:0.1.0")
 }

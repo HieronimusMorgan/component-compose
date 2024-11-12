@@ -18,8 +18,8 @@ import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
-import androidx.compose.ui.graphics.vector.ImageVector
 import androidx.compose.ui.layout.layoutId
+import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.text.style.TextDecoration
 import androidx.compose.ui.tooling.preview.Preview
@@ -27,6 +27,7 @@ import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
 import co.id.nexsoft.component.util.theme.ComponentSize
 import co.id.nexsoft.component.util.theme.ComponentType
+import co.id.nexsoft.component.util.theme.ImageSource
 import co.id.nexsoft.component.util.theme.setId
 
 @Preview(showBackground = true)
@@ -35,8 +36,8 @@ fun ButtonComponentPreview() {
     Column {
         ButtonComponent(
             modifier = Modifier.fillMaxWidth(),
-            drawableStart = Icons.Filled.Lock,
-            drawableEnd = Icons.Filled.Lock,
+            drawableStart = ImageSource.VectorImage(Icons.Default.Lock),
+            drawableEnd = ImageSource.VectorImage(Icons.Default.Lock),
             label = "Button"
         )
         ButtonComponent(
@@ -84,13 +85,13 @@ fun ButtonComponentPreview() {
  * ```
  * val buttonContent: @Composable RowScope.() -> Unit = {
  *     drawableStart?.let {
- *         Icon(imageVector = it, contentDescription = null, tint = Color.White)
+ *         Icon(painter = painterResource(id = it), contentDescription = null, tint = Color.White)
  *         Spacer(modifier = Modifier.weight(1f))
  *     }
  *     Text(text = label, color = buttonColor, style = setTextComponentSize(componentSize).copy(textDecoration = textDecoration))
  *     drawableEnd?.let {
  *         Spacer(modifier = Modifier.weight(1f))
- *         Icon(imageVector = it, contentDescription = null, tint = Color.White)
+ *         Icon(painter = painterResource(id = it), contentDescription = null, tint = Color.White)
  *     }
  * }
  * ```
@@ -161,8 +162,8 @@ fun ButtonComponent(
     componentType: ComponentType = ComponentType.PRIMARY,
     componentSize: ComponentSize = ComponentSize.MEDIUM,
     componentColor: Color = MaterialTheme.colorScheme.primary,
-    drawableStart: ImageVector? = null,
-    drawableEnd: ImageVector? = null,
+    drawableStart: ImageSource? = null,
+    drawableEnd: ImageSource? = null,
     underline: Boolean = false,
     enabled: Boolean = true,
     onClick: () -> Unit = {}
@@ -180,9 +181,26 @@ fun ButtonComponent(
 
     val buttonContent: @Composable RowScope.() -> Unit = {
         drawableStart?.let {
-            Icon(
-                imageVector = it, contentDescription = null, tint = Color.White
-            )
+            when (drawableStart) {
+                is ImageSource.VectorImage -> {
+                    Icon(
+                        imageVector = drawableStart.imageVector,
+                        contentDescription = null,
+                        tint = Color.White
+                    )
+                }
+
+                is ImageSource.DrawableResource -> {
+                    Icon(
+                        painter = painterResource(id = drawableStart.resId),
+                        contentDescription = null,
+                        tint = Color.White
+                    )
+                }
+
+                is ImageSource.UrlImage -> {
+                }
+            }
             Spacer(modifier = Modifier.weight(1f))
         }
         Text(
@@ -192,9 +210,26 @@ fun ButtonComponent(
         )
         drawableEnd?.let {
             Spacer(modifier = Modifier.weight(1f))
-            Icon(
-                imageVector = it, contentDescription = null, tint = Color.White
-            )
+            when (drawableEnd) {
+                is ImageSource.VectorImage -> {
+                    Icon(
+                        imageVector = drawableEnd.imageVector,
+                        contentDescription = null,
+                        tint = Color.White
+                    )
+                }
+
+                is ImageSource.DrawableResource -> {
+                    Icon(
+                        painter = painterResource(id = drawableEnd.resId),
+                        contentDescription = null,
+                        tint = Color.White
+                    )
+                }
+
+                is ImageSource.UrlImage -> {
+                }
+            }
         }
     }
 

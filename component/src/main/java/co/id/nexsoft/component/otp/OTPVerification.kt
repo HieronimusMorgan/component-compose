@@ -1,7 +1,9 @@
 package co.id.nexsoft.component.otp
 
 import androidx.compose.foundation.layout.Arrangement
+import androidx.compose.foundation.layout.Box
 import androidx.compose.foundation.layout.Row
+import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.width
 import androidx.compose.foundation.text.KeyboardOptions
 import androidx.compose.material3.OutlinedTextField
@@ -9,6 +11,7 @@ import androidx.compose.runtime.Composable
 import androidx.compose.runtime.LaunchedEffect
 import androidx.compose.runtime.mutableStateListOf
 import androidx.compose.runtime.remember
+import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.focus.FocusRequester
 import androidx.compose.ui.focus.focusRequester
@@ -96,37 +99,44 @@ fun OtpVerification(
 ) {
     val otpValues = remember { mutableStateListOf(*Array(otpLength) { "" }) }
     val focusRequesters = List(otpLength) { FocusRequester() }
-
-    Row(modifier = modifier, horizontalArrangement = Arrangement.spacedBy(8.dp)) {
-        otpValues.forEachIndexed { index, value ->
-            OutlinedTextField(
-                value = value,
-                onValueChange = { newValue ->
-                    if (newValue.length <= 1) {
-                        otpValues[index] = newValue
-                        if (newValue.isNotEmpty() && index < otpLength - 1) {
-                            focusRequesters[index + 1].requestFocus()
-                        } else if (index == otpLength - 1) {
-                            onOtpComplete(otpValues.joinToString(""))
+    Box(
+        modifier = modifier.fillMaxWidth(),
+        contentAlignment = Alignment.Center
+    ) {
+        Row(
+            horizontalArrangement = Arrangement.spacedBy(8.dp)
+        ) {
+            otpValues.forEachIndexed { index, value ->
+                OutlinedTextField(
+                    value = value,
+                    onValueChange = { newValue ->
+                        if (newValue.length <= 1) {
+                            otpValues[index] = newValue
+                            if (newValue.isNotEmpty() && index < otpLength - 1) {
+                                focusRequesters[index + 1].requestFocus()
+                            } else if (index == otpLength - 1) {
+                                onOtpComplete(otpValues.joinToString(""))
+                            }
                         }
-                    }
-                },
-                keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
-                visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None,
-                singleLine = true,
-                modifier = Modifier
-                    .width(width)
-                    .focusRequester(focusRequesters[index])
-                    .onFocusChanged {
-                        if (it.isFocused && value.isNotEmpty()) otpValues[index] = ""
                     },
-                textStyle = textStyle.copy(textAlign = TextAlign.Center)
-            )
+                    keyboardOptions = KeyboardOptions.Default.copy(keyboardType = KeyboardType.Number),
+                    visualTransformation = if (isPassword) PasswordVisualTransformation() else VisualTransformation.None,
+                    singleLine = true,
+                    modifier = Modifier
+                        .width(width)
+                        .focusRequester(focusRequesters[index])
+                        .onFocusChanged {
+                            if (it.isFocused && value.isNotEmpty()) otpValues[index] = ""
+                        },
+                    textStyle = textStyle.copy(textAlign = TextAlign.Center)
+                )
+            }
         }
     }
 
     LaunchedEffect(Unit) {
         focusRequesters.first().requestFocus()
     }
+
 }
 

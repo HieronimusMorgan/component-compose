@@ -17,6 +17,8 @@ uiTooling = "1.7.4"
 uiToolingPreview = "1.7.4"
 navigationCompose = "2.8.3"
 coilCompose = "2.3.0"
+mapsCompose = "4.4.1"
+mapsSecrets = "2.0.1"
 
 [libraries]
 androidx-constraintlayout-compose = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "constraintlayoutCompose" }
@@ -42,6 +44,7 @@ ui-tooling-preview = { module = "androidx.compose.ui:ui-tooling-preview", versio
 androidx-navigation-compose = { group = "androidx.navigation", name = "navigation-compose", version.ref = "navigationCompose" }
 
 coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose" }
+android-maps-compose = { module = "com.google.maps.android:maps-compose", version.ref = "mapsCompose" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }

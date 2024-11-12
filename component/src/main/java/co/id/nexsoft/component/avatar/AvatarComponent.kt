@@ -468,4 +468,6 @@ object AvatarSize {
     val Large = 48.dp
     val ExtraLarge = 64.dp
     val ExtraLarge2 = 80.dp
+
+    val allSizes = listOf(ExtraSmall, Small, Medium, Large, ExtraLarge, ExtraLarge2)
 }
