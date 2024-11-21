@@ -69,7 +69,7 @@ fun ToggleComponent(
     toggleTitleStyle: TextStyle = BodyLarge,
     toggleTitleColor: Color = colorText,
     componentSize: ComponentSize = ComponentSize.MEDIUM,
-    isChecked: Boolean,
+    isChecked: Boolean = false,
     onCheckedChange: (Boolean) -> Unit,
     onColor: Color = MaterialTheme.colorScheme.primary,
     offColor: Color = Color.Gray,

@@ -1,157 +1,168 @@
 package com.morg.component
 
+
 import androidx.compose.foundation.Image
-import androidx.compose.foundation.clickable
 import androidx.compose.foundation.layout.Column
 import androidx.compose.foundation.layout.Spacer
 import androidx.compose.foundation.layout.fillMaxSize
 import androidx.compose.foundation.layout.fillMaxWidth
 import androidx.compose.foundation.layout.height
 import androidx.compose.foundation.layout.padding
+import androidx.compose.material3.LocalTextStyle
+import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.collectAsState
+import androidx.compose.runtime.getValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
+import androidx.compose.ui.graphics.ColorFilter
 import androidx.compose.ui.res.painterResource
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.text.input.ImeAction
-import androidx.compose.ui.text.style.TextAlign
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import androidx.lifecycle.ViewModel
 import co.id.nexsoft.component.button.ButtonComponent
 import co.id.nexsoft.component.textfield.TextFieldComponent
 import co.id.nexsoft.component.textfield.TextInputType
 import co.id.nexsoft.component.util.theme.BodyMedium
 import co.id.nexsoft.component.util.theme.ComponentSize
 import co.id.nexsoft.component.util.theme.ComponentType
+import kotlinx.coroutines.flow.MutableStateFlow
+import kotlinx.coroutines.flow.StateFlow
 
 @Preview(showBackground = true)
 @Composable
-fun ComponentPreview() {
-    Column(modifier = Modifier.fillMaxSize()) {
+fun LoginPagePreview() {
+    LoginPage(viewModel = LoginViewModel())
+}
+
+@Composable
+fun LoginPage(viewModel: LoginViewModel) {
+    val username by viewModel.username.collectAsState()
+    val password by viewModel.password.collectAsState()
+
+    Column(
+        modifier = Modifier
+            .fillMaxSize()
+            .padding(16.dp),
+        horizontalAlignment = Alignment.CenterHorizontally
+    ) {
         Image(
-            painter = painterResource(R.drawable.ic_group_logo),
-            contentDescription = "Application Logo",
+            painter = painterResource(id = R.drawable.ic_group_logo),
+            contentDescription = "Login page branding image",
             modifier = Modifier
                 .fillMaxWidth()
-                .padding(16.dp),
-        )
-
-        Text(
-            text = "Masuk ke Aplikasi GroUp",
-            modifier = Modifier.fillMaxWidth(),
-            color = Color.Black,
-            fontSize = 24.sp,
-            fontWeight = FontWeight.Bold,
-            textAlign = TextAlign.Center
+                .height(200.dp),
+            colorFilter = ColorFilter.tint(color = Color(0XFFAEB4B7))
         )
 
         Spacer(modifier = Modifier.height(16.dp))
 
         TextFieldComponent(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            id = "txt_username",
+            modifier = Modifier.fillMaxWidth(0.8f),
+            id = "username_input",
             labelModifier = Modifier,
             textStyleLabel = BodyMedium,
-            label = "Nama Pengguna",
-            value = "",
+            label = "Username",
+            value = username,
             readOnly = false,
             enable = true,
-            hint = "Masukkan nama pengguna/nomor ponsel",
+            hint = "",
             onImeAction = ImeAction.Done,
-            componentSize = ComponentSize.LARGE,
+            componentSize = ComponentSize.MEDIUM,
             singleLine = true,
             textInputType = TextInputType.TEXT,
-            onClickIcon = {
-                // Add your logic here
-            },
-            onTextChanged = {
-                // Add your logic here
-            },
+            suffixIconImages = null,
+            prefixIconImages = null,
+            prefixText = "",
+            onClickIcon = { /* Add your logic here */ },
+            onTextChanged = { viewModel.onUsernameChanged(it) },
             countryCodes = emptyList(),
             countryCode = "+62",
-            onCountryCodeClick = {
-                // Add your logic here
-            },
+            onCountryCodeClick = { /* Add your logic here */ },
             dropdownOptions = emptyList(),
-            onDropdownOptionSelected = {
-                // Add your logic here
-            }
+            onDropdownOptionSelected = { /* Add your logic here */ }
         )
+
+        Spacer(modifier = Modifier.height(16.dp))
 
         TextFieldComponent(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            id = "txt_password",
+            modifier = Modifier.fillMaxWidth(0.8f),
+            id = "password_input",
             labelModifier = Modifier,
             textStyleLabel = BodyMedium,
-            label = "Kata Sandi",
-            value = "",
+            label = "Password",
+            value = password,
             readOnly = false,
             enable = true,
-            hint = "Masukkan kata sandi",
+            hint = "",
             onImeAction = ImeAction.Done,
-            componentSize = ComponentSize.LARGE,
+            componentSize = ComponentSize.MEDIUM,
             singleLine = true,
             textInputType = TextInputType.PASSWORD,
-            onClickIcon = {
-                // Add your logic here
-            },
-            onTextChanged = {
-                // Add your logic here
-            },
+            suffixIconImages = null,
+            prefixIconImages = null,
+            prefixText = "",
+            onClickIcon = { /* Add your logic here */ },
+            onTextChanged = { viewModel.onPasswordChanged(it) },
             countryCodes = emptyList(),
             countryCode = "+62",
-            onCountryCodeClick = {
-                // Add your logic here
-            },
+            onCountryCodeClick = { /* Add your logic here */ },
             dropdownOptions = emptyList(),
-            onDropdownOptionSelected = {
-                // Add your logic here
-            }
+            onDropdownOptionSelected = { /* Add your logic here */ }
         )
 
-        Text(
-            text = "Lupa kata sandi?",
-            modifier = Modifier
-                .align(Alignment.End)
-                .clickable { }
-                .padding(end = 16.dp),
-            color = Color.Red,
-            fontSize = 14.sp,
-            textAlign = TextAlign.End
-        )
-
-        Spacer(modifier = Modifier.height(8.dp))
+        Spacer(modifier = Modifier.height(24.dp))
 
         ButtonComponent(
-            modifier = Modifier
-                .fillMaxWidth()
-                .padding(16.dp),
-            id = "btn_login",
-            label = "Masuk",
-            componentSize = ComponentSize.LARGE,
+            modifier = Modifier.fillMaxWidth(0.6f),
+            id = "login_button",
+            label = "Login",
+            componentSize = ComponentSize.MEDIUM,
             componentType = ComponentType.PRIMARY,
-            componentColor = Color.Red,
+            componentColor = MaterialTheme.colorScheme.primary,
+            drawableStart = null,
+            drawableEnd = null,
+            underline = false,
             enabled = true,
-            onClick = {
-                // Add your logic here
-            }
+            onClick = { viewModel.onLoginClicked() }
         )
 
         Spacer(modifier = Modifier.height(8.dp))
 
         Text(
-            text = "Belum punya akun? Daftar",
-            modifier = Modifier.align(Alignment.CenterHorizontally),
-            color = Color.Red,
-            fontSize = 14.sp,
-            textAlign = TextAlign.Center
+            text = "Forgot Password?",
+            modifier = Modifier,
+            color = Color.Unspecified,
+            fontSize = 16.sp,
+            style = LocalTextStyle.current
         )
     }
+}
+
+class LoginViewModel : ViewModel() {
+    private val _username = MutableStateFlow("")
+    val username: StateFlow<String> = _username
+
+    private val _password = MutableStateFlow("")
+    val password: StateFlow<String> = _password
+
+    fun onUsernameChanged(newUsername: String) {
+        _username.value = newUsername
+    }
+
+    fun onPasswordChanged(newPassword: String) {
+        _password.value = newPassword
+    }
+
+    fun onLoginClicked() {
+        // Handle login logic
+    }
+}
+
+class LoginRepository {
+    // Handle data operations, API calls, or database interactions
 }

@@ -22,7 +22,11 @@ import androidx.compose.material3.HorizontalDivider
 import androidx.compose.material3.Text
 import androidx.compose.material3.rememberBottomSheetScaffoldState
 import androidx.compose.runtime.Composable
+import androidx.compose.runtime.getValue
+import androidx.compose.runtime.mutableStateOf
+import androidx.compose.runtime.remember
 import androidx.compose.runtime.rememberCoroutineScope
+import androidx.compose.runtime.setValue
 import androidx.compose.ui.Alignment
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
@@ -30,6 +34,7 @@ import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
+import co.id.nexsoft.component.bottomsheet.BottomSheetComponent
 import co.id.nexsoft.component.util.theme.BodyLarge
 import kotlinx.coroutines.launch
 
@@ -41,6 +46,8 @@ fun HomeScreenPreview() {
 
 @Composable
 fun HomeScreen(navController: NavController, onItemClicked: (String) -> Unit) {
+    var showBottomSheet by remember { mutableStateOf(false) }
+
     LazyColumn(
         modifier = Modifier
             .padding(top = 10.dp)
@@ -48,7 +55,24 @@ fun HomeScreen(navController: NavController, onItemClicked: (String) -> Unit) {
         horizontalAlignment = Alignment.Start
     ) {
         item {
+            Button(
+                onClick = { showBottomSheet = true }
+            ) {
+                Text("Display Partial Bottom Sheet")
+            }
 
+            if (showBottomSheet) {
+                BottomSheetComponent(
+                    modifier = Modifier,
+                    showBottomSheet = showBottomSheet,
+                    onDismiss = { showBottomSheet = false },
+                ) {
+                    Text(
+                        "This is the Bottom Sheet",
+                        modifier = Modifier.padding(16.dp)
+                    )
+                }
+            }
             Screen.entries.forEach { screen ->
                 if (screen.route == "home") {
                     return@forEach

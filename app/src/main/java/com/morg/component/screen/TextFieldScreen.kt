@@ -13,8 +13,10 @@ import androidx.compose.material3.Surface
 import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.platform.LocalContext
+import androidx.compose.ui.text.TextStyle
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
+import androidx.compose.ui.unit.sp
 import androidx.navigation.NavController
 import co.id.nexsoft.component.textfield.TextFieldComponent
 import co.id.nexsoft.component.textfield.TextInputType
@@ -38,6 +40,8 @@ fun TextFieldScreen(navController: NavController) {
 
             TextFieldComponent(label = "Full Name",
                 value = "Hieronimus Fredy Morgan",
+                labelModifier = Modifier.padding(bottom = 20.dp),
+                textStyleLabel = TextStyle(fontSize = 40.sp),
                 readOnly = true,
                 hint = "Enter your password",
                 componentSize = ComponentSize.LARGE,

@@ -31,7 +31,6 @@ import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.layout.layoutId
 import androidx.compose.ui.res.painterResource
 import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
@@ -58,7 +57,7 @@ fun RadioButtonComponent(
     modifier: Modifier = Modifier,
     id: String? = null,
     title: String = "",
-    titleStyle: TextStyle = BodyLarge.merge(fontWeight = FontWeight.Bold),
+    titleStyle: TextStyle = BodyLarge,
     titleColor: Color = colorText,
     selectedColor: Color = MaterialTheme.colorScheme.primary,
     unSelectedColor: Color = Color.Gray,

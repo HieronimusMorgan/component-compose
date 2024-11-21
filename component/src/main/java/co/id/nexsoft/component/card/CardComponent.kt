@@ -184,15 +184,41 @@ fun CardComponent(
     map: Map<String, String>? = null,
     styleMapTitle: TextStyle = BodyMedium,
     styleMapValue: TextStyle = BodyMedium,
-    cardType: CardType = CardType.List,
+    cardType: CardType = CardType.Default,
     cardStyle: CardStyle = CardStyle.Color,
     color: Color = Color.White,
     productModel: CardProductModel? = null,
     icon: ImageSource? = null,
-    onItemClicked: () -> Unit = {}
+    onItemClicked: () -> Unit = {},
+    content: @Composable () -> Unit = {}
 ) {
+
     modifier.layoutId("card_${setId(id, "")}")
     when (cardType) {
+        CardType.Default -> {
+            Card(modifier = modifier
+                .fillMaxWidth()
+                .border(
+                    width = 1.dp, color = MaterialTheme.colorScheme.onSurface.copy(
+                        alpha = 0.5f
+                    ), shape = RoundedCornerShape(SpacingComponent.Sm8)
+                ), colors = when (cardStyle) {
+                CardStyle.Color -> {
+                    CardDefaults.cardColors(
+                        color
+                    )
+                }
+
+                CardStyle.Outline, CardStyle.Shadow -> {
+                    CardDefaults.cardColors(
+                        Color.White
+                    )
+                }
+            }, onClick = { onItemClicked() }) {
+                content()
+            }
+        }
+
         CardType.List -> {
             CardList(
                 modifier = modifier,
@@ -578,7 +604,7 @@ fun CardDetail(
 
 
 enum class CardType {
-    List, Detail, ProductLandscape, ProductPortrait, FeedCard
+    Default, List, Detail, ProductLandscape, ProductPortrait, FeedCard
 }
 
 enum class CardStyle {

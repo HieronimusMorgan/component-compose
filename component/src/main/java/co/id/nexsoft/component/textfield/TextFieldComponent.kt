@@ -135,7 +135,7 @@ fun Preview() {
  * @param onImeAction IME action to be performed.
  * @param componentSize Size of the text field component.
  * @param singleLine Whether the text field is single-line.
- * @param textInputType Type of text input (e.g., TEXT, PASSWORD, PHONE, DROPDOWN).
+ * @param NORMALInputType Type of text input (e.g., TEXT, PASSWORD, PHONE, DROPDOWN).
  * @param suffixIconImages Optional pair of suffix icons.
  * @param prefixIconImages Optional pair of prefix icons.
  * @param prefixText Optional prefix text to be displayed inside the text field.

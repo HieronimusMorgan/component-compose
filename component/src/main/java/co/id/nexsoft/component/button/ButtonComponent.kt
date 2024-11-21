@@ -47,7 +47,8 @@ fun ButtonComponentPreview() {
             componentType = ComponentType.PRIMARY,
             componentSize = ComponentSize.MEDIUM,
             componentColor = MaterialTheme.colorScheme.primary,
-            drawableStart = null,
+            isFullWidth = false,
+            drawableStart = ImageSource.VectorImage(Icons.Default.Lock),
             drawableEnd = null,
             underline = false,
             enabled = true,
@@ -162,6 +163,7 @@ fun ButtonComponent(
     componentType: ComponentType = ComponentType.PRIMARY,
     componentSize: ComponentSize = ComponentSize.MEDIUM,
     componentColor: Color = MaterialTheme.colorScheme.primary,
+    isFullWidth: Boolean = false, // Add isFullWidth parameter
     drawableStart: ImageSource? = null,
     drawableEnd: ImageSource? = null,
     underline: Boolean = false,
@@ -201,7 +203,8 @@ fun ButtonComponent(
                 is ImageSource.UrlImage -> {
                 }
             }
-            Spacer(modifier = Modifier.weight(1f))
+            if (isFullWidth)
+                Spacer(modifier = Modifier.weight(1f))
         }
         Text(
             text = label,
@@ -209,7 +212,8 @@ fun ButtonComponent(
             style = setTextComponentSize(componentSize).copy(textDecoration = textDecoration)
         )
         drawableEnd?.let {
-            Spacer(modifier = Modifier.weight(1f))
+            if (isFullWidth)
+                Spacer(modifier = Modifier.weight(1f))
             when (drawableEnd) {
                 is ImageSource.VectorImage -> {
                     Icon(
