@@ -79,6 +79,9 @@ dependencies {
     
     // Hilt for Dependency Injection
     implementation(libs.dagger.hilt.android)
+    implementation libs.androidx.room.compiler
+    implementation libs.androidx.room.common
+    implementation libs.androidx.room.ktx
     kapt(libs.dagger.hilt.compiler)
     
     // Test dependencies
@@ -95,4 +98,18 @@ dependencies {
     // UI tooling dependencies
     implementation(libs.ui.tooling)
     implementation(libs.ui.tooling.preview)
+    
+    
+    implementation 'com.google.dagger:hilt-android:2.47'
+    kapt 'com.google.dagger:hilt-android-compiler:2.47'
+    
+    // Hilt for Jetpack Compose
+    implementation 'androidx.hilt:hilt-navigation-compose:1.0.0'
+    
+    // Retrofit and Gson Converter
+    implementation 'com.squareup.retrofit2:retrofit:2.9.0'
+    implementation 'com.squareup.retrofit2:converter-gson:2.9.0'
+    
+    // OkHttp for logging (optional but recommended)
+    implementation 'com.squareup.okhttp3:logging-interceptor:4.10.0'
 }

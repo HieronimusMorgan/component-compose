@@ -13,7 +13,6 @@ import androidx.compose.foundation.layout.size
 import androidx.compose.foundation.layout.width
 import androidx.compose.material3.Checkbox
 import androidx.compose.material3.CheckboxDefaults
-import androidx.compose.material3.MaterialTheme
 import androidx.compose.material3.Text
 import androidx.compose.runtime.Composable
 import androidx.compose.runtime.getValue
@@ -31,7 +30,9 @@ import androidx.compose.ui.unit.Dp
 import androidx.compose.ui.unit.TextUnit
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.unit.sp
+import co.id.nexsoft.component.util.theme.BodySmall
 import co.id.nexsoft.component.util.theme.ComponentSize
+import co.id.nexsoft.component.util.theme.TitleMedium
 import co.id.nexsoft.component.util.theme.setId
 
 @Preview(showBackground = true)
@@ -55,7 +56,9 @@ fun CheckboxComponentPreview() {
         title = "Choose an Option",
         options = options,
         componentSize = ComponentSize.MEDIUM,
-        onCheckedChange = onCheckedChange,
+        onCheckedChange = { updatedOptions ->
+            options.putAll(updatedOptions) // Update the snapshot-backed map
+        },
         informationText = "Select only one option to proceed.",
         errorText = if (options.count { it.value } != 1) "Please select exactly one option." else ""
     )
@@ -66,7 +69,7 @@ fun CheckboxComponent(
     modifier: Modifier = Modifier,
     id: String? = null,
     title: String = "",
-    titleStyle: TextStyle = MaterialTheme.typography.titleMedium,
+    titleStyle: TextStyle = TitleMedium,
     titleColor: Color = Color.Black,
     checkedColor: Color = Color.Blue,
     uncheckedColor: Color = Color.Gray,
@@ -76,11 +79,11 @@ fun CheckboxComponent(
     options: MutableMap<String, Boolean>, // MutableMap to toggle checkboxes
     onCheckedChange: (Map<String, Boolean>) -> Unit,
     informationText: String = "",
-    informationTextStyle: TextStyle = MaterialTheme.typography.bodySmall,
+    informationTextStyle: TextStyle = BodySmall,
     informationTextColor: Color = Color.Gray,
     errorText: String = "",
-    errorTextStyle: TextStyle = MaterialTheme.typography.bodySmall,
-    errorTextColor: Color = MaterialTheme.colorScheme.error
+    errorTextStyle: TextStyle = BodySmall,
+    errorTextColor: Color = Color.Red
 ) {
     // Track the state of each checkbox
     val checkedOptions by remember { mutableStateOf(options) }

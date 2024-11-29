@@ -19,6 +19,9 @@ navigationCompose = "2.8.3"
 coilCompose = "2.3.0"
 mapsCompose = "4.4.1"
 mapsSecrets = "2.0.1"
+roomCompiler = "2.6.1"
+roomCommon = "2.6.1"
+roomKtx = "2.6.1"
 
 [libraries]
 androidx-constraintlayout-compose = { module = "androidx.constraintlayout:constraintlayout-compose", version.ref = "constraintlayoutCompose" }
@@ -47,6 +50,9 @@ coil-compose = { module = "io.coil-kt:coil-compose", version.ref = "coilCompose"
 android-maps-compose = { module = "com.google.maps.android:maps-compose", version.ref = "mapsCompose" }
 dagger-hilt-android = "com.google.dagger:hilt-android:2.48"
 dagger-hilt-compiler = "com.google.dagger:hilt-android-compiler:2.48"
+androidx-room-compiler = { group = "androidx.room", name = "room-compiler", version.ref = "roomCompiler" }
+androidx-room-common = { group = "androidx.room", name = "room-common", version.ref = "roomCommon" }
+androidx-room-ktx = { group = "androidx.room", name = "room-ktx", version.ref = "roomKtx" }
 
 [plugins]
 android-application = { id = "com.android.application", version.ref = "agp" }
