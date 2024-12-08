@@ -67,7 +67,7 @@ fun CardComponent(
     id: String? = null,
     padding: Dp = SpacingComponent.Sm8,
     cardStyle: CardStyle = CardStyle.Color,
-    color: Color = Color.Blue,
+    color: Color = Color.White,
     onItemClicked: () -> Unit = {},
     content: @Composable () -> Unit = {}
 ) {

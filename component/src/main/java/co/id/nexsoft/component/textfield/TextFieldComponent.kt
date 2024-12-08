@@ -159,7 +159,7 @@ fun TextFieldComponent(
     enable: Boolean = true,
     hint: String = "",
     onImeAction: ImeAction = ImeAction.Done,
-    componentSize: ComponentSize = ComponentSize.LARGE,
+    componentSize: ComponentSize = ComponentSize.MEDIUM,
     singleLine: Boolean = true,
     textInputType: TextInputType = TextInputType.TEXT,
     suffixIconImages: Pair<ImageVector?, ImageVector?>? = null,

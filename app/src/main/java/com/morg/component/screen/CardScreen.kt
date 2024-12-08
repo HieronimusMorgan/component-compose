@@ -12,19 +12,12 @@ import androidx.compose.runtime.Composable
 import androidx.compose.ui.Modifier
 import androidx.compose.ui.graphics.Color
 import androidx.compose.ui.platform.LocalContext
-import androidx.compose.ui.text.TextStyle
-import androidx.compose.ui.text.font.FontWeight
 import androidx.compose.ui.tooling.preview.Preview
 import androidx.compose.ui.unit.dp
 import androidx.navigation.NavController
 import co.id.nexsoft.component.card.CardComponent
 import co.id.nexsoft.component.card.CardStyle
-import co.id.nexsoft.component.card.CardType
 import co.id.nexsoft.component.util.model.CardProductModel
-import co.id.nexsoft.component.util.theme.BodyMedium
-import co.id.nexsoft.component.util.theme.ImageSource
-import co.id.nexsoft.component.util.theme.TitleLarge
-import co.id.nexsoft.component.util.theme.TitleSmall
 
 @Preview(showBackground = true)
 @Composable
@@ -50,10 +43,6 @@ fun CardScreen(navController: NavController) {
                 "Key 5" to "Value 5",
             )
             CardComponent(
-                cardType = CardType.Detail,
-                title = "Title",
-                styleMapTitle = TitleLarge.merge(TextStyle(fontWeight = FontWeight.Bold)),
-                map = map,
                 onItemClicked = {})
             Spacer(modifier = Modifier.height(16.dp))
 
@@ -67,8 +56,6 @@ fun CardScreen(navController: NavController) {
             )
 
             CardComponent(
-                cardType = CardType.ProductLandscape,
-                productModel = productModel,
                 onItemClicked = {})
 
             Spacer(modifier = Modifier.height(16.dp))
@@ -76,18 +63,8 @@ fun CardScreen(navController: NavController) {
             CardComponent(
                 modifier = Modifier,
                 id = "card_1",
-                title = "Title",
-                styleTitle = TitleSmall,
-                description = "Description",
-                styleDescription = BodyMedium,
-                map = null,
-                styleMapTitle = BodyMedium,
-                icon = ImageSource.DrawableResource(co.id.nexsoft.component.R.drawable.ic_error_component),  // Add the icon here
-                styleMapValue = BodyMedium,
-                cardType = CardType.List,
                 cardStyle = CardStyle.Color,
                 color = Color.White,
-                productModel = null,
                 onItemClicked = {/* Handle item click */ })
         }
     }
