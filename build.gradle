@@ -6,3 +6,9 @@ plugins {
     alias(libs.plugins.kotlin.compose) apply false
     alias(libs.plugins.dagger.hilt.android) apply false // Add this line for Hilt plugin
 }
+
+configurations.configureEach {
+    resolutionStrategy {
+        force 'org.jetbrains:annotations:23.0.0' // Replace with the desired version
+    }
+}

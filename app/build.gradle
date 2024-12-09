@@ -66,7 +66,7 @@ dependencies {
     implementation(libs.advanced.bottomsheet.material3)
     implementation(libs.dagger.hilt.android)
     kapt(libs.dagger.hilt.compiler)
-    implementation(libs.androidx.room.compiler)
+    annotationProcessor(libs.androidx.room.compiler)
     implementation(libs.androidx.room.common)
     implementation(libs.androidx.room.ktx)
     implementation(libs.firebase.firestore.ktx)

@@ -42,7 +42,9 @@ import com.morg.component.screen.StepperScreen
 import com.morg.component.screen.TextFieldScreen
 import com.morg.component.screen.ToggleScreen
 import com.morg.component.screen.VideoScreen
+import dagger.hilt.android.AndroidEntryPoint
 
+@AndroidEntryPoint
 class MainActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
