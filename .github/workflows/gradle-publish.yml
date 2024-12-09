@@ -22,24 +22,31 @@ jobs:
       with:
         java-version: '17'
         distribution: 'temurin'
-        server-id: github  # Optional: required if publishing to Maven Central
-        settings-path: ${{ github.workspace }}
+        check-latest: true
 
-    # Step 3: Grant execute permissions to Gradle wrapper
+    # Step 3: Verify Java version
+    - name: Verify Java version
+      run: java -version
+
+    # Step 4: Set JAVA_HOME explicitly
+    - name: Set JAVA_HOME
+      run: echo "JAVA_HOME=${{ steps.setup-java.outputs.java-home }}" >> $GITHUB_ENV
+
+    # Step 5: Grant execute permissions to Gradle wrapper
     - name: Grant execute permission for Gradle wrapper
       run: chmod +x ./gradlew
 
-    # Step 4: Debug Gradle environment (optional but helpful for troubleshooting)
+    # Step 6: Debug Gradle environment
     - name: Debug Gradle Environment
       run: ./gradlew -version
 
-    # Step 5: Build the project with Gradle
+    # Step 7: Build the project with Gradle
     - name: Build with Gradle
       uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25
       with:
         arguments: build
 
-    # Step 6: Publish to GitHub Packages
+    # Step 8: Publish to GitHub Packages
     - name: Publish to GitHub Packages
       uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25
       with:
@@ -48,6 +55,6 @@ jobs:
         GITHUB_ACTOR: ${{ github.actor }}
         GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
 
-    # Step 7: Cleanup or post-build actions (optional)
+    # Step 9: Cleanup or post-build actions (optional)
     - name: Post-build cleanup
       run: echo "Build and publish steps completed."
