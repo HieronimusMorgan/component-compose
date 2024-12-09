@@ -6,35 +6,48 @@ on:
 
 jobs:
   build:
-
     runs-on: ubuntu-latest
     permissions:
       contents: read
       packages: write
 
     steps:
-    - uses: actions/checkout@v3
+    # Step 1: Checkout the repository
+    - name: Checkout repository
+      uses: actions/checkout@v3
 
+    # Step 2: Set up JDK 11
     - name: Set up JDK 11
       uses: actions/setup-java@v3
       with:
         java-version: '11'
         distribution: 'temurin'
-        server-id: github
+        server-id: github  # Optional: required if publishing to Maven Central
         settings-path: ${{ github.workspace }}
 
-    - name: Grant execute permission for gradlew
-      run: chmod +x gradlew
+    # Step 3: Grant execute permissions to Gradle wrapper
+    - name: Grant execute permission for Gradle wrapper
+      run: chmod +x ./gradlew
 
+    # Step 4: Debug Gradle environment (optional but helpful for troubleshooting)
+    - name: Debug Gradle Environment
+      run: ./gradlew -version
+
+    # Step 5: Build the project with Gradle
     - name: Build with Gradle
       uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25
       with:
         arguments: build
 
+    # Step 6: Publish to GitHub Packages
     - name: Publish to GitHub Packages
       uses: gradle/gradle-build-action@bd5760595778326ba7f1441bcf7e88b49de61a25
       with:
         arguments: publish
       env:
-        USERNAME: ${{ github.actor }}
-        TOKEN: ${{ secrets.GITHUB_TOKEN }}
+        GITHUB_ACTOR: ${{ github.actor }}
+        GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+
+    # Step 7: Cleanup or post-build actions (optional)
+    - name: Post-build cleanup
+      run: echo "Build and publish steps completed."
